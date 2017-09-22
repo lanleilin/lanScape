@@ -44,7 +44,8 @@
                 product = {
                     name: $(this).find('input[name=name]').val(),
                     manufacturer: $(this).find('input[name=manufacturer]').val(),
-                    price: parseFloat($(this).find('input[name=price]').val())
+                    // price: parseFloat($(this).find('input[name=price]').val())
+                    price: $(this).find('input[name=price]').val()
                 };
             // AJAX提交JSON:
             $.ajax({
@@ -102,23 +103,23 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Create New Product</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>新建</h3>
                 </div>
                 <div class="panel-body">
                     <form id="product-form">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Product name" value="">
+                            <input type="text" name="name" class="form-control" placeholder="标题" value="">
                             <p class="help-block">Product name</p>
                         </div>
                         <div class="form-group">
                             <label>Manufacturer</label>
-                            <input type="text" name="manufacturer" class="form-control" placeholder="Manufacturer name" value="">
+                            <input type="text" name="manufacturer" class="form-control" placeholder="描述" value="">
                             <p class="help-block">Manufacturer name</p>
                         </div>
                         <div class="form-group">
                             <label>Price</label>
-                            <input type="number" name="price" class="form-control" placeholder="Product price" value="">
+                            <input type="text" name="price" class="form-control" placeholder="网址" value="">
                             <p class="help-block">Product price</p>
                         </div>
                         <div class="form-group">

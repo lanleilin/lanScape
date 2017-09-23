@@ -79,10 +79,10 @@
                                     <img class="media-object" style="width:40px; height:40px;" src="/static/images/icon.png">
                                 </span>
                                 <i class="dropdown-menu" aria-labelledby="dropdownMenu1" v-on:click="deleteProduct(p.id)" href="#0">
-                                    <span><a>删除</a></span>
+                                    删除
                                 </i>
                                 <h4 class="media-heading" v-text="p.name"></h4>
-                                <span v-text="p.manufacturer"></span>
+                                <p v-text="p.manufacturer"></p>
                                 <!-- <span> -->
                                 <a type="button" class="btn btn-primary" target="_blank" v-bind:href=p.price>前往</a>
                                 <!-- </span> -->

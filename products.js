@@ -15,7 +15,7 @@ function Product(name, manufacturer, price) {
 }
 
 var products = [
-    new Product('百度', '搜图', 'https://www.baidu.com'),
+    new Product('convertio', '图片pdf压缩转换', 'https://convertio.co/zh/png-svg/'),
     new Product('Bootstrap', '组件', 'http://v3.bootcss.com/components/#btn-groups'),
     new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
 ];

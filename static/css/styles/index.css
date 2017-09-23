@@ -15,11 +15,18 @@
 #product-list ul li:nth-child(1) span,
 #product-list ul li:nth-child(1) h4 {
   display: inline-block;
-  margin: 0 10px 0 5px;
+  overflow: hidden;
 }
 #product-list ul li:nth-child(1) span,
 #product-list ul li:nth-child(1) h4 {
   flex: 1;
+}
+#product-list ul li:nth-child(1) p {
+  flex: 2;
+  overflow: hidden;
+}
+#product-list ul li:nth-child(1) i {
+  text-align: center;
 }
 #product-list ul li:nth-child(1) a {
   float: right;

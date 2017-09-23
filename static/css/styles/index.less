@@ -9,9 +9,18 @@
 
         li:nth-child(1){
             border-bottom: 1px solid lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             img,span,h4{
                 display: inline-block;
                 margin: 0 10px 0 5px
+            }
+            span,h4{
+                flex: 1;
+            }
+            a{
+                float: right;
             }
         }
         li:last-child{

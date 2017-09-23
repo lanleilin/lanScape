@@ -7,12 +7,22 @@
 }
 #product-list ul li:nth-child(1) {
   border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #product-list ul li:nth-child(1) img,
 #product-list ul li:nth-child(1) span,
 #product-list ul li:nth-child(1) h4 {
   display: inline-block;
   margin: 0 10px 0 5px;
+}
+#product-list ul li:nth-child(1) span,
+#product-list ul li:nth-child(1) h4 {
+  flex: 1;
+}
+#product-list ul li:nth-child(1) a {
+  float: right;
 }
 #product-list ul li:last-child {
   display: flex;

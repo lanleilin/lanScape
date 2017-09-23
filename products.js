@@ -15,7 +15,7 @@ function Product(name, manufacturer, price) {
 }
 
 var products = [
-    new Product('百度', 'baidu', 'https://www.baidu.com'),
+    new Product('百度', 'baidu', 'htt'),
     new Product('ThinkPad T440', 'Lenovo', 5999),
     new Product('LBP2900', 'Canon', 1099)
 ];

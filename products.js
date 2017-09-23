@@ -15,9 +15,9 @@ function Product(name, manufacturer, price) {
 }
 
 var products = [
-    new Product('百度', 'baidu', 'htt'),
-    new Product('ThinkPad T440', 'Lenovo', 5999),
-    new Product('LBP2900', 'Canon', 1099)
+    new Product('百度', '搜图', 'https://www.baidu.com'),
+    new Product('Bootstrap', '组件', 'http://v3.bootcss.com/components/#btn-groups'),
+    new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
 ];
 
 module.exports = {

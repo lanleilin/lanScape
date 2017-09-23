@@ -1,0 +1,31 @@
+* {
+    list-style: none;
+}
+
+#product-list{
+    ul {
+        border: 1px solid lightseagreen;
+        padding: 4px;
+
+        li:nth-child(1){
+            border-bottom: 1px solid lightgray;
+            img,span,h4{
+                display: inline-block;
+                margin: 0 10px 0 5px
+            }
+        }
+        li:last-child{
+            display: flex;
+            justify-content: flex-end;
+            border-top: 1px solid lightgray;
+            // padding-right: 10px;
+            padding: 4px 10px;
+        }
+        p{
+            width: 100%;
+            overflow: hidden;
+            padding: 10px 5px 0 10px;
+        }
+    }
+
+}

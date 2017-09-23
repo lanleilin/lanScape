@@ -1,8 +1,27 @@
 * {
-    list-style: none;
+  list-style: none;
 }
-
-ul {
-    border: 1px solid lightcoral;
-    padding: 4px;
+#product-list ul {
+  border: 1px solid lightseagreen;
+  padding: 4px;
+}
+#product-list ul li:nth-child(1) {
+  border-bottom: 1px solid lightgray;
+}
+#product-list ul li:nth-child(1) img,
+#product-list ul li:nth-child(1) span,
+#product-list ul li:nth-child(1) h4 {
+  display: inline-block;
+  margin: 0 10px 0 5px;
+}
+#product-list ul li:last-child {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid lightgray;
+  padding: 4px 10px;
+}
+#product-list ul p {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 5px 0 10px;
 }

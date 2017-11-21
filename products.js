@@ -38,7 +38,26 @@ module.exports = {
     createProduct: (name, manufacturer, price) => {
         var p = new Product(name, manufacturer, price);
         products.push(p);
+        console.log('++++++++++++++++++++++++++++++++++++++CreateProduct');
         return p;
+    },
+    updateProduct: (id) => {
+        var
+            index = -1,
+            i;
+        for (i = 0; i < products.length; i++) {
+            if (products[i].id == id) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            // update products[index]:
+            var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
+
+            return products.splice(index, 1, newPro)[0];
+        }
+        return null;
     },
 
     deleteProduct: (id) => {

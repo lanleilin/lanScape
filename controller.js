@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 // add url-route in /controllers:
@@ -21,6 +20,10 @@ function addMapping(router, mapping) {
             var path = url.substring(7);
             router.del(path, mapping[url]);
             console.log(`register URL mapping: DELETE ${path}`);
+        } else if (url.startsWith('UPDATE ')) {
+            var path = url.substring(7);
+            router.del(path, mapping[url]);
+            console.log(`register URL mapping: UPDATE ${path}`);
         } else {
             console.log(`invalid URL: ${url}`);
         }
@@ -37,7 +40,7 @@ function addControllers(router, dir) {
     });
 }
 
-module.exports = function (dir) {
+module.exports = function(dir) {
     let
         controllers_dir = dir || 'controllers',
         router = require('koa-router')();

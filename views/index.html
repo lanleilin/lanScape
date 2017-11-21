@@ -7,6 +7,7 @@
             data: {
                 products: []
             },
+
             methods: {
                 deleteProduct: function(id) {
                     var that = this;
@@ -28,6 +29,42 @@
                         // Not 200:
                         alert('Error: ' + jqXHR.status);
                     });
+                },
+                updateProduct: function(id) {
+                    var that = this;
+                    // AJAX提交JSON:
+                    $.ajax({
+                        type: 'delete',
+                        dataType: 'json',
+                        url: '/api/products/' + id
+                    }).done(function(r) {
+                        console.log(r);
+                        var i;
+                        for (i = 0; i < that.products.length; i++) {
+                            if (that.products[i].id === r.id) {
+                                var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
+                                console.log(products);
+                                console.log(newPro);
+                                that.products.splice(i, 1, newPro);
+
+                                return;
+                            }
+                        }
+                    }).fail(function(jqXHR, textStatus) {
+                        // Not 200:
+                        alert('Error: ' + jqXHR.status);
+                    });
+                },
+                testlog() {
+                    console.log('testlog');
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '/api/products'
+                    }).done(function(data) {
+                        console.log('success')
+                        console.log(data)
+                    })
                 }
             }
         });
@@ -73,28 +110,22 @@
                 </div>
                 <div class="panel-body">
                     <div id="product-list">
+                        <p @click='testlog'>testlog</p>
                         <ul v-for="p in products">
                             <li class="dropup">
                                 <span class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <img class="media-object" style="width:40px; height:40px;" src="/static/images/icon.png">
                                 </span>
-                                <i class="dropdown-menu" aria-labelledby="dropdownMenu1" v-on:click="deleteProduct(p.id)" href="#0">
+                                <i class="dropdown-menu" aria-labelledby="dropdownMenu1" v-on:click="updateProduct(p.id)" href="#0">
                                     删除
                                 </i>
                                 <h4 class="media-heading" v-text="p.name"></h4>
                                 <p v-text="p.manufacturer"></p>
-                                <!-- <span> -->
                                 <a type="button" class="btn btn-primary" target="_blank" v-bind:href=p.price>前往</a>
-                                <!-- </span> -->
                             </li>
                             <li>
                                 <p v-text="p.price"></p>
                             </li>
-
-                            <!-- <li> -->
-                            <!-- <a target="_blank" v-bind:href="'http://search.jd.com/Search?enc=utf-8&keyword=' + encodeURIComponent(p.name)">前往</a> -->
-                            <!-- <a type="button" class="btn btn-primary" target="_blank" v-bind:href=p.price>前往</a> -->
-                            <!-- </li> -->
                         </ul>
 
                     </div>

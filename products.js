@@ -54,6 +54,7 @@ module.exports = {
         if (index >= 0) {
             // update products[index]:
             var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
+            console.log('++++++++++++++++++++++++++++++++++++++UpdateProduct');
 
             return products.splice(index, 1, newPro)[0];
         }

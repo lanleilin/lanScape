@@ -23,8 +23,9 @@ module.exports = {
             throw new APIError('product:not_found', 'product not found by id.');
         }
     },
-    'UPDATE /api/products/:id': async(ctx, next) => {
+    'PUT /api/products/:id': async(ctx, next) => {
         console.log(`update product ${ctx.params.id}...`);
+        console.log('++++++++++++++++++++++++++++++++++++++++++++++++++UpdateProduct')
         var p = products.updateProduct(ctx.params.id);
         if (p) {
             ctx.rest(p);

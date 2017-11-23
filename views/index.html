@@ -3,7 +3,8 @@
 <script>
     $(function() {
         var vm = new Vue({
-            el: '#product-list',
+            // el: '#product-list',
+            el: '#product-container',
             data: {
                 products: []
             },
@@ -34,7 +35,7 @@
                     var that = this;
                     // AJAX提交JSON:
                     $.ajax({
-                        type: 'delete',
+                        type: 'put',
                         dataType: 'json',
                         url: '/api/products/' + id
                     }).done(function(r) {
@@ -42,10 +43,16 @@
                         var i;
                         for (i = 0; i < that.products.length; i++) {
                             if (that.products[i].id === r.id) {
+                                function Product(name, manufacturer, price) {
+                                    this.id = 2;
+                                    this.name = name;
+                                    this.manufacturer = manufacturer;
+                                    this.price = price;
+                                }
                                 var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
-                                console.log(products);
                                 console.log(newPro);
                                 that.products.splice(i, 1, newPro);
+                                console.log(that.products);
 
                                 return;
                             }
@@ -101,7 +108,7 @@
     });
 </script>
 
-<div class="container">
+<div class="container" id="product-container">
     <div class="row">
         <div class="col-md-8" style="min-height:400px">
             <div class="panel panel-default">
@@ -111,6 +118,7 @@
                 <div class="panel-body">
                     <div id="product-list">
                         <p @click='testlog'>testlog</p>
+                        <a href="video.html">testVideo</a>
                         <ul v-for="p in products">
                             <li class="dropup">
                                 <span class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

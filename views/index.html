@@ -40,23 +40,27 @@
                         url: '/api/products/' + id
                     }).done(function(r) {
                         console.log(r);
-                        var i;
-                        for (i = 0; i < that.products.length; i++) {
-                            if (that.products[i].id === r.id) {
-                                function Product(name, manufacturer, price) {
-                                    this.id = 2;
-                                    this.name = name;
-                                    this.manufacturer = manufacturer;
-                                    this.price = price;
-                                }
-                                var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
-                                console.log(newPro);
-                                that.products.splice(i, 1, newPro);
-                                console.log(that.products);
+                        // var i;
+                        // for (i = 0; i < that.products.length; i++) {
+                        //     if (that.products[i].id === r.id) {
+                        //         function Product(name, manufacturer, price) {
+                        //             this.id = 2;
+                        //             this.name = name;
+                        //             this.manufacturer = manufacturer;
+                        //             this.price = price;
+                        //         }
+                        //         var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
+                        //         that.products.splice(i, 1, newPro);
 
-                                return;
-                            }
-                        }
+                        //         return;
+                        //     }
+                        // }
+                        $.getJSON('/api/products').done(function(data) {
+                            vm.products = data.products;
+                        }).fail(function(jqXHR, textStatus) {
+                            alert('Error: ' + jqXHR.status);
+                        });
+
                     }).fail(function(jqXHR, textStatus) {
                         // Not 200:
                         alert('Error: ' + jqXHR.status);

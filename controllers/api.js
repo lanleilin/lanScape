@@ -1,4 +1,5 @@
-const products = require('../products');
+// const products = require('../products');
+const products = require('../dbproduct');
 
 const APIError = require('../rest').APIError;
 

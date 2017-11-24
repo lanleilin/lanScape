@@ -11,6 +11,7 @@
 
             methods: {
                 deleteProduct: function(id) {
+                    console.log('delete')
                     var that = this;
                     // AJAX提交JSON:
                     $.ajax({
@@ -28,7 +29,7 @@
                         }
                     }).fail(function(jqXHR, textStatus) {
                         // Not 200:
-                        alert('Error: ' + jqXHR.status);
+                        console.log('Error: ' + jqXHR.status);
                     });
                 },
                 updateProduct: function(id) {
@@ -40,23 +41,10 @@
                         url: '/api/products/' + id
                     }).done(function(r) {
                         console.log(r);
-                        // var i;
-                        // for (i = 0; i < that.products.length; i++) {
-                        //     if (that.products[i].id === r.id) {
-                        //         function Product(name, manufacturer, price) {
-                        //             this.id = 2;
-                        //             this.name = name;
-                        //             this.manufacturer = manufacturer;
-                        //             this.price = price;
-                        //         }
-                        //         var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
-                        //         that.products.splice(i, 1, newPro);
 
-                        //         return;
-                        //     }
-                        // }
                         $.getJSON('/api/products').done(function(data) {
                             vm.products = data.products;
+                            // console.log(vm.products)
                         }).fail(function(jqXHR, textStatus) {
                             alert('Error: ' + jqXHR.status);
                         });
@@ -81,6 +69,9 @@
         });
 
         $.getJSON('/api/products').done(function(data) {
+            console.log(data)
+            console.log(data.products)
+
             vm.products = data.products;
         }).fail(function(jqXHR, textStatus) {
             alert('Error: ' + jqXHR.status);
@@ -128,6 +119,7 @@
                                 <span class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <img class="media-object" style="width:40px; height:40px;" src="/static/images/icon.png">
                                 </span>
+                                <!-- <i class="dropdown-menu" aria-labelledby="dropdownMenu1" v-on:click="deleteProduct(p.id)" href="#0"> -->
                                 <i class="dropdown-menu" aria-labelledby="dropdownMenu1" v-on:click="updateProduct(p.id)" href="#0">
                                     删除
                                 </i>

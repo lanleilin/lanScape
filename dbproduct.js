@@ -7,18 +7,20 @@ function nextId() {
     return 'p' + id;
 }
 
-function Product(name, manufacturer, price) {
-    this.id = nextId();
+function Product(id, name, manufacturer, price) {
+    // this.id = nextId();
+    this.id = id;
     this.name = name;
     this.manufacturer = manufacturer;
     this.price = price;
 }
 
-var products = [
-    new Product('convertio', '图片pdf压缩转换', 'https://convertio.co/zh/png-svg/'),
-    new Product('Bootstrap', '组件', 'http://v3.bootcss.com/components/#btn-groups'),
-    new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
-];
+// var products = [
+//     new Product('convertio', '图片pdf压缩转换', 'https://convertio.co/zh/png-svg/'),
+//     new Product('Bootstrap', '组件', 'http://v3.bootcss.com/components/#btn-groups'),
+//     new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
+// ];
+var products = [];
 
 // 数据库
 const Sequelize = require('sequelize');
@@ -39,9 +41,10 @@ var Pet = sequelize.define('pet', {
         type: Sequelize.STRING(50),
         primaryKey: true
     },
-    name: Sequelize.STRING(100),
     gender: Sequelize.BOOLEAN,
-    birth: Sequelize.STRING(10),
+    name: Sequelize.STRING(100),
+    description: Sequelize.STRING(500),
+    address: Sequelize.STRING(500),
     createdAt: Sequelize.BIGINT,
     updatedAt: Sequelize.BIGINT,
     version: Sequelize.BIGINT
@@ -50,35 +53,23 @@ var Pet = sequelize.define('pet', {
 });
 
 var now = Date.now();
-// (async() => {
-//     var dog = await Pet.create({
-//         id: 'd-' + now,
-//         name: 'little_dog',
-//         gender: false,
-//         birth: '2017-08-08',
-//         createdAt: now,
-//         updatedAt: now,
-//         version: 0
-//     });
-//     console.log('created: ' + JSON.stringify(dog));
-// })();
-// 查询
-// (async() => {
-//     var pets = await Pet.findAll({
-//         where: {
-//             name: 'little_dog'
-//         }
-//     });
-//     console.log(`find ${pets.length} pets:`);
-//     for (let p of pets) {
-//         console.log('++++++++++++++++++++++++++++++++++++++++++++')
-//         console.log(JSON.stringify(p));
 
-//     }
-// })();
 
 module.exports = {
     getProducts: () => {
+        (async() => {
+            var pets = await Pet.findAll({
+                where: {
+                    gender: false
+                }
+            });
+            console.log(`find ${pets.length} pets:`);
+            products = [];
+            for (let p of pets) {
+                var str = new Product(p.id, p.name, p.description, p.address);
+                products.push(str)
+            }
+        })();
         return products;
     },
 
@@ -93,66 +84,65 @@ module.exports = {
     },
 
     createProduct: (name, manufacturer, price) => {
-        var p = new Product(name, manufacturer, price);
+        // 存入
+        var now = Date.now();
+        var id = 'd-' + now;
+        (async() => {
+            var dog = await Pet.create({
+                id: 'd-' + now,
+                gender: false,
+                name: name,
+                description: manufacturer,
+                address: price,
+                createdAt: now,
+                updatedAt: now,
+                version: 0
+            });
+            console.log('created: ' + JSON.stringify(dog));
+        })();
+        var p = new Product(id, name, manufacturer, price);
         products.push(p);
         console.log('++++++++++++++++++++++++++++++++++++++CreateProduct');
         return p;
     },
     updateProduct: (id) => {
-        var
-            index = -1,
-            i;
-        for (i = 0; i < products.length; i++) {
-            if (products[i].id == id) {
-                index = i;
-                break;
-            }
-        }
-        if (index >= 0) {
-            // update products[index]:
-            var newPro = new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
 
-            console.log('++++++++++++++++++++++++++++++++++++++UpdateProduct');
-            var petPro = {};
-            (async() => {
-                var pets = await Pet.findAll({
-                    where: {
-                        name: 'little_dog'
-                    }
-                });
-                console.log(`find ${pets.length} pets:`);
-                for (let p of pets) {
-                    console.log('++++++++++++++++++++++++++++++++++++++++++++')
-                    console.log(JSON.stringify(p));
-                    var p1 = JSON.stringify(p)
-
-                    petPro.id = '188';
-                    petPro.name = JSON.parse(p1).name;
-                    petPro.manufacturer = JSON.parse(p1).createdAt;
-                    petPro.price = JSON.parse(p1).birth;
+        (async() => {
+            var pets = await Pet.findAll({
+                where: {
+                    id: id
                 }
-            })();
+            });
+            for (let p of pets) {
+                await p.destroy();
+            }
+        })();
 
-            // return products.splice(index, 1, newPro)[0];
-            return products.splice(index, 1, petPro)[0];
-        }
+        return products;
+
         return null;
     },
 
     deleteProduct: (id) => {
-        var
-            index = -1,
-            i;
-        for (i = 0; i < products.length; i++) {
-            if (products[i].id === id) {
-                index = i;
-                break;
-            }
-        }
-        if (index >= 0) {
-            // remove products[index]:
-            return products.splice(index, 1)[0];
-        }
+
+
+
+
+        // var
+        //     index = -1,
+        //     i;
+        // console.log(products.length)
+        // for (i = 0; i < products.length; i++) {
+        //     if (products[i].id === id) {
+        //         index = i;
+        //         break;
+        //     }
+        // }
+
+        // if (index >= 0) {
+        //     return products.splice(index, 1)[0];
+        // }
+        return products;
         return null;
     }
 };

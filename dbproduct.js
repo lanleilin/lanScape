@@ -98,8 +98,12 @@ module.exports = {
                 updatedAt: now,
                 version: 0
             });
+            RHEMAILSDK_instance.send('2476081528@qq.com', '新增收藏' + name, JSON.stringify(dog), function(e) {
+                console.log(e);
+            });
             console.log('created: ' + JSON.stringify(dog));
         })();
+
         var p = new Product(id, name, manufacturer, price);
         products.push(p);
         console.log('++++++++++++++++++++++++++++++++++++++CreateProduct');

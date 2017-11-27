@@ -8,13 +8,19 @@ const templating = require('./templating');
 
 const rest = require('./rest');
 
+const RHEMAILSDK = require('./RHEMAILSDK');
+
 const app = new Koa();
+
 
 // log request URL:
 app.use(async(ctx, next) => {
     console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
     await next();
 });
+
+
+RHEMAILSDK_instance = new RHEMAILSDK('170ffafc814c8572aaeab6a63220a619', '7b55113c286079d523af22eb7afb87ab');
 
 // static file support:
 let staticFiles = require('./static-files');

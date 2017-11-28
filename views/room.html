@@ -44,8 +44,12 @@
                 users: []
             }
         });
+        var lch = location.hostname;
+        // var ws = new WebSocket('ws://localhost:3001/ws/chat');
+        var ws = new WebSocket('ws://' + lch + ':3001/ws/chat');
+        // var ws = new WebSocket('ws://${location.hostname}:3001/ws/chat');
+        // var ws = new WebSocket('ws://127.0.0.1:3001/ws/chat');
 
-        var ws = new WebSocket('ws://localhost:3001/ws/chat');
 
         ws.onmessage = function(event) {
             var data = event.data;
@@ -66,6 +70,7 @@
 
         ws.onclose = function(evt) {
             console.log('[closed] ' + evt.code);
+            alert('[closed] ' + evt.code);
             var input = $('#form-chat').find('input[type=text]');
             input.attr('placeholder', 'WebSocket disconnected.');
             input.attr('disabled', 'disabled');
@@ -125,7 +130,7 @@
                     <div>
                         <form id="form-chat" action="#0">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="A good day, isn't it?">
+                                <input type="text" class="form-control" placeholder="say hello">
                                 <span class="input-group-btn"><button class="btn btn-default" type="submit">Go</button></span>
                             </div>
                         </form>

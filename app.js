@@ -115,8 +115,8 @@ function createWebSocketServer(server, onConnection, onMessage, onClose, onError
         ws.on('error', onError);
         if (location.pathname !== '/ws/chat') {
             // close ws:
-            ws.close(4000, 'Invalid URL');
             console.log('invalid url')
+            ws.close(4000, 'Invalid URL');
         }
         // check user:
         let user = parseUser(ws.upgradeReq);

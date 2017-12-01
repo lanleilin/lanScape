@@ -15,11 +15,7 @@ function Product(id, name, manufacturer, price) {
     this.price = price;
 }
 
-// var products = [
-//     new Product('convertio', '图片pdf压缩转换', 'https://convertio.co/zh/png-svg/'),
-//     new Product('Bootstrap', '组件', 'http://v3.bootcss.com/components/#btn-groups'),
-//     new Product('VueJs', '过渡', 'https://cn.vuejs.org/v2/guide/transitions.html')
-// ];
+
 var products = [];
 
 // 数据库
@@ -98,9 +94,9 @@ module.exports = {
                 updatedAt: now,
                 version: 0
             });
-            RHEMAILSDK_instance.send('2476081528@qq.com', '新增收藏' + name, JSON.stringify(dog), function(e) {
-                console.log(e);
-            });
+            // RHEMAILSDK_instance.send('2476081528@qq.com', '新增收藏' + name, JSON.stringify(dog), function(e) {
+            //     console.log(e);
+            // });
             console.log('created: ' + JSON.stringify(dog));
         })();
 
@@ -129,23 +125,6 @@ module.exports = {
 
     deleteProduct: (id) => {
 
-
-
-
-        // var
-        //     index = -1,
-        //     i;
-        // console.log(products.length)
-        // for (i = 0; i < products.length; i++) {
-        //     if (products[i].id === id) {
-        //         index = i;
-        //         break;
-        //     }
-        // }
-
-        // if (index >= 0) {
-        //     return products.splice(index, 1)[0];
-        // }
         return products;
         return null;
     }

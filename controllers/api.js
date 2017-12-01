@@ -18,16 +18,7 @@ module.exports = {
     'DELETE /api/products/:id': async(ctx, next) => {
         console.log(`delete product ${ctx.params.id}...`);
         var p = products.deleteProduct(ctx.params.id);
-        // deleteProduct(ctx.params.id);
-        // (async() => {
-        //     var p = await Pet.findAll({
-        //         where: {
-        //             id: ctx.params.id
-        //         }
-        //     });
-        //     await p.destroy();
-        // })();
-        // ctx.rest(123)
+
         if (p) {
             ctx.rest(p);
         } else {

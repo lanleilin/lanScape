@@ -55,12 +55,6 @@ app.use(controller());
 
 
 
-
-// app.listen(3001);
-// console.log('app started at port 3001...');
-// websocket
-
-
 let server = app.listen(3001);
 
 function parseUser(obj) {

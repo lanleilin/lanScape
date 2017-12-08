@@ -1,4 +1,5 @@
 // store products as database:
+const fs = require('fs')
 
 var id = 0;
 
@@ -94,15 +95,26 @@ module.exports = {
                 updatedAt: now,
                 version: 0
             });
+            // 发送邮件
             // RHEMAILSDK_instance.send('2476081528@qq.com', '新增收藏' + name, JSON.stringify(dog), function(e) {
             //     console.log(e);
             // });
             console.log('created: ' + JSON.stringify(dog));
+            // 写入txt
+            fs.writeFile('output.txt', JSON.stringify(dog), function(err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('ok')
+                }
+            })
+
         })();
 
         var p = new Product(id, name, manufacturer, price);
         products.push(p);
         console.log('++++++++++++++++++++++++++++++++++++++CreateProduct');
+
         return p;
     },
     updateProduct: (id) => {

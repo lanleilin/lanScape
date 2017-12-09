@@ -9,6 +9,11 @@ module.exports = {
             products: products.getProducts()
         });
     },
+    'GET /api/testTxt': async(ctx, next) => {
+        ctx.rest({
+            txt: 'testTxt'
+        });
+    },
 
     'POST /api/products': async(ctx, next) => {
         var p = products.createProduct(ctx.request.body.name, ctx.request.body.manufacturer, ctx.request.body.price);

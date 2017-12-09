@@ -101,7 +101,7 @@ module.exports = {
             // });
             console.log('created: ' + JSON.stringify(dog));
             // 写入txt
-            fs.writeFile('output.txt', JSON.stringify(dog), function(err) {
+            fs.writeFile('static/text/output.txt', JSON.stringify(dog), function(err) {
                 if (err) {
                     console.log(err);
                 } else {

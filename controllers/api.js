@@ -11,7 +11,7 @@ module.exports = {
     },
     'GET /api/testTxt': async(ctx, next) => {
         ctx.rest({
-            txt: 'testTxt'
+            txt: products.getTxt()
         });
     },
 

@@ -79,7 +79,27 @@ module.exports = {
         }
         return null;
     },
+    getTxt: () => {
+        var txt = '';
+        // (async() => {
+        //     await (function() {
+        //         fs.readFile('static/text/output.txt', 'utf-8', function(err, data) {
+        //             if (err) {
+        //                 console.log(err);
+        //             } else {
+        //                 console.log(data);
+        //                 txt = data.toString();
+        //                 console.log(1)
+        //                 return txt;
+        //             }
+        //         });
+        //     })();
+        // })();
+        txt = fs.readFileSync('static/text/output.txt', 'utf-8');
+        console.log(txt)
+        return txt;
 
+    },
     createProduct: (name, manufacturer, price) => {
         // 存入
         var now = Date.now();

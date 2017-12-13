@@ -47,6 +47,57 @@ module.exports = {
         })();
         return ts;
 
+    },
+    createTest: function() {
+        var now = Date.now();
+        var id = 'd-' + now;
+        (async() => {
+            await Rabbit.create({
+                id: 'd-' + now,
+                gender: true,
+                name: 'ltuz',
+                age: 'ltuz',
+                color: 'red',
+                createdAt: now,
+                updatedAt: now,
+                version: 0
+            });
+            await (function() {
+                for (let i = 0; i < 10; i++) {
+                    Rabbit.create({
+                        id: 'd-' + now,
+                        gender: true,
+                        name: 'bla',
+                        age: 'luz',
+                        color: 'red',
+                        createdAt: now,
+                        updatedAt: now,
+                        version: 0
+                    });
+                }
+
+            })();
+
+
+
+        })();
+
+        return 0;
+    },
+    deleteTest: function() {
+        (async() => {
+            var rabbits = await Rabbit.findAll({
+                where: {
+                    gender: true
+                }
+            });
+            for (let p of rabbits) {
+                p.destroy();
+            }
+
+        })();
+        return ts;
+
     }
 }
 let now = Date.now();

@@ -40,9 +40,20 @@ module.exports = {
             throw new APIError('product:not_found', 'product not found by id.');
         }
     },
+    // samples test
     'GET /api/testDb': async(ctx, next) => {
         ctx.rest({
             txt: test.getTest()
         });
     },
+    'GET /api/deleteTest': async(ctx, next) => {
+        ctx.rest({
+            txt: test.deleteTest()
+        });
+    },
+    'GET /api/createTest': async(ctx, next) => {
+        ctx.rest({
+            txt: test.createTest()
+        });
+    }
 };

@@ -67,6 +67,7 @@ module.exports = {
                 var str = new Product(p.id, p.name, p.description, p.address);
                 products.push(str)
             }
+
         })();
         return products;
     },

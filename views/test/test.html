@@ -23,12 +23,14 @@
             console.log('hello')
             $.ajax({
                 type: 'get',
-                url: '/api/testTxt',
+                url: '/api/testDb',
+                // url: '/api/products',
                 dataType: 'json',
                 success: function(data) {
                     console.log(data);
                 }
             })
+
         })
     </script>
 </body>

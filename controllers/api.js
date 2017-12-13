@@ -1,5 +1,6 @@
 // const products = require('../products');
 const products = require('../db/dbproduct');
+const test = require('../db/dbTest');
 
 const APIError = require('../middlewares/rest').APIError;
 
@@ -38,5 +39,10 @@ module.exports = {
         } else {
             throw new APIError('product:not_found', 'product not found by id.');
         }
-    }
+    },
+    'GET /api/testDb': async(ctx, next) => {
+        ctx.rest({
+            txt: test.getTest()
+        });
+    },
 };

@@ -6,7 +6,10 @@ module.exports = {
         ctx.render('video.html');
     },
     'GET /douban.html': async(ctx, next) => {
-        ctx.render('dist/index.html');
+        ctx.render('dist/douban.html');
+    },
+    'GET /test/test.html': async(ctx, next) => {
+        ctx.render('test/test.html');
     },
     // 'GET /signin': async(ctx, next) => {
     //     ctx.render('signin.html');

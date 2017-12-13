@@ -6,11 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/samples/test/css/test.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
 </head>
 
 <body>
     <h1>this is test</h1>
-    <script src="js/test.js"></script>
+    <button id="btn">插入10条数据</button>
+    <a href="/test/index.html">to index</a>
+    <script src="/static/samples/test/js/test.js"></script>
+    <script>
+        $('#btn').click(function() {
+            console.log('hello')
+            $.ajax({
+                type: 'get',
+                url: '/api/testTxt',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

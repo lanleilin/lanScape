@@ -1,7 +1,7 @@
 // const products = require('../products');
-const products = require('../dbproduct');
+const products = require('../db/dbproduct');
 
-const APIError = require('../rest').APIError;
+const APIError = require('../middlewares/rest').APIError;
 
 module.exports = {
     'GET /api/products': async(ctx, next) => {

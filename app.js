@@ -4,11 +4,11 @@ const bodyParser = require('koa-bodyparser');
 
 const controller = require('./controller');
 
-const templating = require('./templating');
+const templating = require('./middlewares/templating');
 
-const rest = require('./rest');
+const rest = require('./middlewares/rest');
 
-const RHEMAILSDK = require('./RHEMAILSDK');
+const RHEMAILSDK = require('./middlewares/RHEMAILSDK');
 
 const Cookies = require('cookies');
 const url = require('url');
@@ -30,7 +30,7 @@ RHEMAILSDK_instance = new RHEMAILSDK('170ffafc814c8572aaeab6a63220a619', '7b5511
 
 
 // static file support:
-let staticFiles = require('./static-files');
+let staticFiles = require('./middlewares/static-files');
 app.use(staticFiles('/static/', __dirname + '/static'));
 
 // parse request body:

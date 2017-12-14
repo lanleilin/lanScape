@@ -16,21 +16,66 @@
 <body>
     <h1>this is test</h1>
     <button id="btn">插入10条数据</button>
+    <button id="btnDel">删除</button>
+    <button id="testLog">testlog</button>
+    <button id="cros">跨域</button>
     <a href="/test/index.html">to index</a>
     <script src="/static/samples/test/js/test.js"></script>
     <script>
-        $('#btn').click(function() {
-            console.log('hello')
-            $.ajax({
-                type: 'get',
-                // url: '/api/testDb',
-                // url: '/api/createTest',
-                url: '/api/deleteTest',
-                // url: '/api/products',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                }
+        $(function() {
+            $('#btnDel').click(function() {
+                $.ajax({
+                    type: 'get',
+                    // url: '/api/testDb',
+                    // url: '/api/createTest',
+                    url: '/api/deleteTest',
+                    // url: '/api/products',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                    }
+                })
+
+            })
+            $('#btn').click(function() {
+                $.ajax({
+                    type: 'get',
+                    url: '/api/createTest',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                    }
+                })
+            })
+            $('#testLog').click(function() {
+                $.ajax({
+                    type: 'get',
+                    url: '/api/testLog',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                    }
+                })
+            })
+            $('#cros').click(function() {
+                console.log('say cros')
+                    // $.ajax({
+                    //     type: 'get',
+                    //     url: 'http://localhost:3002',
+                    //     dataType: 'jsonp',
+                    //     success: function(data) {
+                    //         console.log(data)
+                    //     }
+                    // })
+                $.ajax({　　　　　　
+                    'url': 'http://localhost:3002',
+                    'method': 'get',
+                    'dataType': 'jsonp',
+                    'data': {},
+                    'success': function(data) {　　　　　　　　
+                        console.log(data);　　　　　　
+                    }　　　　
+                });
             })
 
         })

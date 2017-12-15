@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>uploadImg</title>
+    <style type="text/css">
+        .btn {
+            width: 100px;
+            height: 40px;
+        }
+        
+        .preview-picture {
+            width: 300px;
+            min-height: 300px;
+            border: 1px #f0f0f0 solid
+        }
+    </style>
 </head>
 
 <body>
-    <h1>this is index</h1>
+    <button class="btn" id="J_UploadPictureBtn">上传图片</button>
+    <hr/>
+    <p>上传进度<span id="J_UploadProgress">0</span>%</p>
+    <p>上传结果图片</p>
+    <div id="J_PicturePreview" class="preview-picture">
+    </div>
+    <!-- <script src="/js/index.js"></script> -->
+    <script src="/static/samples/test/js/index.js"></script>
+
 </body>
 
 </html>

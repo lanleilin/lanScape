@@ -47,6 +47,7 @@ module.exports = {
         }
     },
     // samples test
+    // jsonp test
     "GET /jsonp/testLog": async(ctx, next) => {
         var data = {
             txt: 'test log'
@@ -62,19 +63,38 @@ module.exports = {
             //普通的json
         }
     },
+    // read text test
     "GET /api/testDb": async(ctx, next) => {
         ctx.rest({
             txt: test.getTest()
         });
     },
+    // delete db test
     "GET /api/deleteTest": async(ctx, next) => {
         ctx.rest({
             txt: test.deleteTest()
         });
     },
+    // create db test
     "GET /api/createTest": async(ctx, next) => {
         ctx.rest({
             txt: test.createTest()
         });
+    },
+    // upload image test
+    "POST /api/picture/upload.json": async(ctx, next) => {
+
+        const path = require('path')
+        const { uploadFile } = require('../static/samples/test/util/upload')
+            // 上传文件请求处理
+        let result = { success: false }
+        let lanscape = path.resolve(__dirname, '..') //当前目录的上级目录
+        let serverFilePath = path.join(lanscape, 'static/samples/test/image')
+            // 上传文件事件
+        result = await uploadFile(ctx, {
+            fileType: 'album',
+            path: serverFilePath
+        })
+        ctx.body = result
     }
 };

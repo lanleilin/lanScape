@@ -83,6 +83,7 @@ module.exports = {
     },
     getTxt: () => {
         var txt = '';
+        // 异步读取文件
         // (async() => {
         //     await (function() {
         //         fs.readFile('static/text/output.txt', 'utf-8', function(err, data) {
@@ -97,9 +98,26 @@ module.exports = {
         //         });
         //     })();
         // })();
+        // 同步读取文件
         txt = fs.readFileSync('static/text/output.txt', 'utf-8');
-        console.log(txt)
+        // console.log(txt)
         return txt;
+        // 流形式打开文件
+        // var rs = fs.createReadStream('static/videos/testVideo.mp4', 'utf-8');
+
+        // rs.on('data', function(chunk) {
+        //     console.log('DATA:')
+        //     // console.log(chunk);
+        // });
+
+        // rs.on('end', function() {
+        //     console.log('END');
+        // });
+
+        // rs.on('error', function(err) {
+        //     console.log('ERROR: ' + err);
+        // });
+        // return rs;
 
     },
     createProduct: (name, manufacturer, price) => {

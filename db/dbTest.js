@@ -106,18 +106,18 @@ module.exports = {
     },
     uploadImgTest: function(ctx) {
         // var data = 'jjjjj'
-        (async(ctx) => {
-            // 上传文件请求处理
-            let result = { success: false }
-            let serverFilePath = path.join(__dirname, 'static/image')
+        // (async(ctx) => {
+        //     // 上传文件请求处理
+        //     let result = { success: false }
+        //     let serverFilePath = path.join(__dirname, 'static/image')
 
-            // 上传文件事件
-            result = await uploadFile(ctx, {
-                fileType: 'album',
-                path: serverFilePath
-            })
-            ctx.body = result
-        })();
+        //     // 上传文件事件
+        //     result = await uploadFile(ctx, {
+        //         fileType: 'album',
+        //         path: serverFilePath
+        //     })
+        //     ctx.body = result
+        // })();
         // (async() => {
         // await (function() {
         //     // 异步读取文件

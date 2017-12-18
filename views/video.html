@@ -40,10 +40,32 @@
 </style>
 <h1>video test</h1>
 <h2 id="startVideo">start video</h2>
+<button id="getVideoBtn">获取视频</button>
 <div id="videoContainer">
     <!-- <video id="video" controls="controls"></video> -->
-    <video src="/static/videos/testVideo.mp4" controls="controls"></video>
+    <video id="video" src="/static/videos/testVideo.mp4" controls="controls"></video>
 </div>
+
 <script>
+    // $(function() {
+    // $('#getVideoBtn').click(function() {
+    // $.ajax({
+    //     type: 'get',
+    //     // url: '/api/testLog',
+    //     // url: '/api/testTxt',
+    //     url: '/api/testVideo',
+    //     dataType: 'json',
+    //     success: function(data) {
+    //         console.log('success')
+    //         console.log(data)
+    //         var blob = data;
+    //         //获取blob对象地址，并把值赋给容器
+    //         $("#video").attr("src", URL.createObjectURL(blob));
+    //     }
+    // })
+
+    //     })
+
+    // })
 </script>
 {% endblock %}

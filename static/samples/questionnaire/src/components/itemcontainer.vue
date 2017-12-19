@@ -186,9 +186,9 @@ export default {
 			font-family: 'Arial';
 		}
 		.has_choosed{
-			background-color: #ffd400;
+			background-color: #34bd22;
 			color: #575757;
-			border-color: #ffd400;
+			border-color: lightblue;
 		}
 		.option_detail{
 			width: 7.5rem;

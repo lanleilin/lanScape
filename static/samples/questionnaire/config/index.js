@@ -3,7 +3,7 @@ var path = require('path')
 
 module.exports = {
     build: {
-        env: {NODE_ENV: '"production"'},
+        env: { NODE_ENV: '"production"' },
         index: path.resolve(__dirname, '../happyfri/index.html'),
         assetsRoot: path.resolve(__dirname, '../happyfri'),
         assetsSubDirectory: 'static',
@@ -17,13 +17,33 @@ module.exports = {
         productionGzipExtensions: ['js', 'css']
     },
     dev: {
-        env: {NODE_ENV: '"development"'},
+        env: { NODE_ENV: '"development"' },
         port: 3088,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         context: [ //代理路径
 
         ],
+        proxyTable: {
+            'lanKoaServer': {
+                target: 'http://localhost:3001/',
+                // target: 'https://h5.anychat.net.cn/AnyChatFaceXClient',
+                secure: false, // 接受 运行在 https 上的服务
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/lanKoaServer': ''
+                }
+            },
+            '/AnyChatFaceXClient': {
+                target: 'http://120.76.248.33:8081/AnyChatFaceXClient',
+                // target: 'https://h5.anychat.net.cn/AnyChatFaceXClient',
+                secure: false, // 接受 运行在 https 上的服务
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/AnyChatFaceXClient': ''
+                }
+            },
+        },
         proxypath: 'https://mainsite-restapi.ele.me',
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README

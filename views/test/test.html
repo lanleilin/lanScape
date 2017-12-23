@@ -19,6 +19,7 @@
     <button id="btnDel">删除</button>
     <button id="testLog">testlog</button>
     <button id="cros">跨域</button>
+    <button id="getDoubanBook">getDoubanBook</button>
     <a href="/test/index.html">to index</a>
     <script src="/static/samples/test/js/test.js"></script>
     <script>
@@ -76,6 +77,11 @@
                         console.log(data);　　　　　　
                     }　　　　
                 });
+            })
+            $('#getDoubanBook').click(function() {
+                $.ajax({
+                    'url': ''
+                })
             })
 
         })

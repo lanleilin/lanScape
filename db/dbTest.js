@@ -5,7 +5,10 @@ const config = require('../config/config');
 const fs = require('fs')
 const path = require('path')
 const { uploadFile } = require('../static/samples/test/util/upload')
-    // 创建一个sequelize对象实例
+
+const request = require("request");
+
+// 创建一个sequelize对象实例
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: 'mysql',
@@ -104,51 +107,17 @@ module.exports = {
         return ts;
 
     },
-    uploadImgTest: function(ctx) {
-        // var data = 'jjjjj'
-        // (async(ctx) => {
-        //     // 上传文件请求处理
-        //     let result = { success: false }
-        //     let serverFilePath = path.join(__dirname, 'static/image')
+    crawlerImg: function(ctx) {
+        var txt = 'success'
+        var imgLink = 'http://localhost:3001/static/images/joi/joi1.jpg'
+        var dir = './static/crawlImg';
 
-        //     // 上传文件事件
-        //     result = await uploadFile(ctx, {
-        //         fileType: 'album',
-        //         path: serverFilePath
-        //     })
-        //     ctx.body = result
-        // })();
-        // (async() => {
-        // await (function() {
-        //     // 异步读取文件
-        //     fs.readFile('static/text/output.txt', 'utf-8', function(err, data) {
-        //         if (err) {
-        //             console.log(err);
-        //         } else {
-        //             console.log(data);
-        //             txt = data.toString();
-        //             return txt;
-        //         }
-        //     });
-
-        // })();
-        // await (function(ctx) {
-        //     // 上传文件请求处理
-        //     let result = { success: false }
-        //     let serverFilePath = path.join(__dirname, 'static/image')
-        //         // console.log(serverFilePath)
-        //         // 上传文件事件
-        //         (async() => {
-        //             result = await uploadFile(ctx, {
-        //                 fileType: 'album',
-        //                 path: serverFilePath
-        //             })
-        //         })();
-        //     ctx.body = result
-        //     txt = '我有一只mmp我从来也不骑'
-
-        // })();
-        // })();
+        request(imgLink)
+            .on('error', function(err) {
+                console.log(err);
+            })
+            .pipe(fs.createWriteStream(dir + "/" + 'joi.jpg'));
+        console.log('下载完成');
         return txt;
     }
 }

@@ -38,17 +38,6 @@
         width: 100%;
         max-width: 400px;
     }
-    /* @media screen and(max-width:540px) {
-        #videoContainer video {
-            width: 200px;
-        }
-    }
-    
-    @media screen and(min-width:540px) {
-        #videoContainer video {
-            width: 200px;
-        }
-    } */
     
     #box {
         width: 100%;
@@ -65,6 +54,9 @@
     <button id="getImgBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#getImgModal">
         获取图片
       </button>
+    <!-- <button id="obtainImgBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#getImgModal">
+            抓取图片
+          </button> -->
 
     <!-- Modal -->
     <div class="modal fade" id="getImgModal" tabindex="-1" role="dialog" aria-labelledby="getImgModalLabel">
@@ -111,6 +103,18 @@
                     $('#videoContainer').append('<img src="/static/images/joi/joi.jpg" alt="">')
                     $('#getImgModal').modal('toggle')
 
+                } else if (ipt == 'j') {
+                    $.ajax({
+                        url: 'api/crawlerImg',
+                        dataType: 'json',
+                        method: 'get',
+                        success: function(data) {
+                            console.log(data);
+
+                        }
+                    })
+                    $('#getImgModal').modal('toggle')
+
                 } else {
                     $('#videoContainer').empty()
                     flagImg = !flagImg;
@@ -133,6 +137,7 @@
 
             }
         })
+
 
     })
 </script>

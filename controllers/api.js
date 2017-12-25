@@ -69,7 +69,14 @@ module.exports = {
             txt: 'this is test text'
         });
     },
-    // read text test
+    // 爬取图片
+    "GET /api/crawlerImg": async(ctx, next) => {
+        ctx.rest({
+            txt: test.crawlerImg()
+        });
+        // ctx.response.body = 'gonna get img'
+    },
+    // 读取数据库txt
     "GET /api/testDb": async(ctx, next) => {
         ctx.rest({
             txt: test.getTest()
@@ -108,15 +115,6 @@ module.exports = {
         ctx.rest({
             txt: 'this is test text'
         });
-        // // var rs = fs.createReadStream('static/videos/testVideo.mp4', 'utf-8');
-        // console.log('hehehehe')
-        // let head = { 'Content-Type': 'video/mp4' };
-        // //需要设置HTTP HEAD
-        // ctx.body.writeHead(200, head);
-        // //使用pipe
-        // fs.createReadStream('static/videos/testVideo.mp4').pipe(ctx.body);
 
-        // // fs.createReadStream('./assets/sintel.mp4')
-        // //     .pipe(res);
     },
 };

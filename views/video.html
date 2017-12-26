@@ -68,9 +68,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="sizing-addon1">@</span>
+                        <span class="input-group-addon" id="sizing-addon1">address</span>
                         <input id="getImgInput" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
                     </div>
+                    <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">class</span>
+                            <input id="getImgInputClass" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -98,16 +102,23 @@
             // 加载不同图片
         $('#getImgConfirm').click(function() {
                 var ipt = $('#getImgInput').val();
+                var ge = $('#getImgInputClass').val();
+                
+                var imgClass = '.photo-list-padding'
                 if (ipt == 'joi') {
                     $('#videoContainer').empty()
                     $('#videoContainer').append('<img src="/static/images/joi/joi.jpg" alt="">')
                     $('#getImgModal').modal('toggle')
 
-                } else if (ipt == 'j') {
+                } else if (ipt == 'df' || ipt == 'dft') {
                     $.ajax({
                         url: 'api/crawlerImg',
                         dataType: 'json',
-                        method: 'get',
+                        method: 'post',
+                        data: {
+                            webAddress: ipt,
+                            imgClass: imgClass
+                        },
                         success: function(data) {
                             console.log(data);
 
@@ -137,6 +148,19 @@
 
             }
         })
+
+
+        function joiTimestamp() {
+            let d = new Date();
+            this.mouth = d.toDateString().slice(0, 7).split(' ').join('');
+            this.ftime = `${this.mouth}${d.getHours()}时${d.getMinutes()}分${d.getSeconds()}`
+            return this.ftime;
+        }
+        var timeDir = joiTimestamp();
+        console.log(timeDir)
+        var imgClass = '.photo-list-padding'
+        var imgTarget = `${imgClass} a img`
+        console.log(imgTarget)
 
 
     })

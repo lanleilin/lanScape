@@ -71,9 +71,11 @@ module.exports = {
         });
     },
     // 爬取图片
-    "GET /api/crawlerImg": async(ctx, next) => {
+    "POST /api/crawlerImg": async(ctx, next) => {
+        // console.log(ctx.request.body.info)
+        var info = ctx.request.body;
         ctx.rest({
-            txt: imgCrawler.scratch()
+            txt: imgCrawler.scratch(info)
         });
         // ctx.response.body = 'gonna get img'
     },

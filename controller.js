@@ -1,5 +1,6 @@
-const fs = require('fs');
+// 映射路由
 
+const fs = require('fs');
 // add url-route in /controllers:
 
 function addMapping(router, mapping) {
@@ -30,11 +31,13 @@ function addMapping(router, mapping) {
         }
     }
 }
-
+// 路由
 function addControllers(router, dir) {
+    // 读取controllers 下js
     fs.readdirSync(__dirname + '/' + dir).filter((f) => {
         return f.endsWith('.js');
     }).forEach((f) => {
+        // 映射路由
         console.log(`process controller: ${f}...`);
         let mapping = require(__dirname + '/' + dir + '/' + f);
         addMapping(router, mapping);

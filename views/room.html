@@ -107,7 +107,7 @@
                             <div style="margin-bottom:25px;" v-for="msg in messages">
                                 <div v-if="msg.type === 'join' || msg.type === 'left'">
                                     <div class="media-left">
-                                        <img class="media-object" style="width:20px; height:20px;" v-bind:src="'/static/images/' + msg.user.image + '.png'">
+                                        <img class="media-object" style="width:20px; height:20px;" v-bind:src="'/static/images/avatar/' + msg.user.image + '.png'">
                                     </div>
                                     <div class="media-body">
                                         <h4 class="media-heading" v-text="msg.data"></h4>
@@ -116,7 +116,7 @@
                                 <div v-if="msg.type === 'chat'">
                                     <div class="media">
                                         <div class="media-left">
-                                            <img class="media-object" style="width:48px; height:48px;" v-bind:src="'/static/images/' + msg.user.image + '.png'">
+                                            <img class="media-object" style="width:48px; height:48px;" v-bind:src="'/static/images/avatar/' + msg.user.image + '.png'">
                                         </div>
                                         <div class="media-body">
                                             <h4 class="media-heading" v-text="msg.user.name"></h4>
@@ -148,7 +148,7 @@
                         <div id="user-list">
                             <div class="media" v-for="user in users">
                                 <div class="media-left">
-                                    <img class="media-object" style="width:20px; height:20px;" v-bind:src="'/static/images/' + user.image + '.png'">
+                                    <img class="media-object" style="width:20px; height:20px;" v-bind:src="'/static/images/avatar/' + user.image + '.png'">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading" v-text="user.name + ' (' + user.id + ')'"></h4>

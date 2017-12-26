@@ -1,6 +1,7 @@
 const fs = require('fs');
 const products = require("../db/dbproduct");
 const test = require("../db/dbTest");
+const imgCrawler = require("../db/imgCrawler");
 // jsonp
 const urllib = require('url');
 
@@ -72,7 +73,7 @@ module.exports = {
     // 爬取图片
     "GET /api/crawlerImg": async(ctx, next) => {
         ctx.rest({
-            txt: test.crawlerImg()
+            txt: imgCrawler.scratch()
         });
         // ctx.response.body = 'gonna get img'
     },

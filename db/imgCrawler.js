@@ -20,7 +20,7 @@ module.exports = {
             try {
                 var url = info.webAddress;
                 var imgClass = info.imgClass
-                var imgTarget = `${imgClass} a img`
+                var imgTarget = `${imgClass}  img`
             } catch (e) {
                 return 'error'
             }
@@ -48,17 +48,31 @@ module.exports = {
                 console.log(err);
             }
         });
-
+        // 判断是否为完整地址
+        function IsURL(str_url) {
+            var strRegex = '^((https|http|ftp|rtsp|mms)?://)';
+            var re = new RegExp(strRegex);
+            if (re.test(str_url)) {
+                return (true);
+            } else {
+                return (false);
+            }
+        }
         // 发送请求
         request(url, function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var $ = cheerio.load(body);
+
                 $(imgTarget).each(function() {
                     var src = $(this).attr('src');
-                    // src = src.replace(/t_s208x130c5/, 't_s960x600c5');
-                    links.push(src);
+                    if (IsURL(src) && links.length <= 10) {
+                        links.push(src);
+                    } else {
+                        return;
+                    }
+                    // links.push(src);
                 });
-                // console.log(links)
+                console.log(links)
 
                 // 每次只执行一个异步操作
                 async.mapSeries(links, function(item, callback) {

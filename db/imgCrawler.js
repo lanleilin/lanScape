@@ -1,9 +1,9 @@
 //依赖模块
-var fs = require('fs');
-var request = require("request");
-var cheerio = require("cheerio");
-var mkdirp = require('mkdirp');
-var async = require('async');
+const fs = require('fs');
+const request = require("request");
+const cheerio = require("cheerio");
+const mkdirp = require('mkdirp');
+const async = require('async');
 
 module.exports = {
     scratch: function(info) {
@@ -72,7 +72,7 @@ module.exports = {
                     }
                     // links.push(src);
                 });
-                console.log(links)
+                // console.log(links)
 
                 // 每次只执行一个异步操作
                 async.mapSeries(links, function(item, callback) {

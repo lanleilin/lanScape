@@ -8,105 +8,83 @@
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <link rel="stylesheet" href="/static/samples/test/css/test.css">
+    <style>
+        #box {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #testh1 img {
+            height: 80%;
+            margin-left: -180px;
+        }
+    </style>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/vue.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
 </head>
 
 <body>
-
-    <h1>this is test</h1>
-    <button id="btn">插入10条数据</button>
-    <button id="btnDel">删除</button>
-    <button id="testLog">testlog</button>
-    <button id="cros">跨域</button>
-    <button id="getDoubanBook">getDoubanBook</button>
-    <a href="/test/index.html">to index</a>
-    <div>
-
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="home">1...</div>
-            <div role="tabpanel" class="tab-pane" id="profile">2...</div>
-            <div role="tabpanel" class="tab-pane" id="messages">3...</div>
-            <div role="tabpanel" class="tab-pane" id="settings">4...</div>
-        </div>
-
+    <div id="box">
+        <a href="./index.html">go to index</a>
+        <h1 id="testh1">this is test</h1>
+        <canvas id="table"></canvas>
     </div>
+    <!-- <p>要使用的图像：</p>
+    <img id="tulip" src="/static/images/joi/joiInRain.jpg" alt="The Tulip" />
+
+    <p>画布：</p>
+    <canvas id="myCanvas" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
+	Your browser does not support the HTML5 canvas tag.
+	</canvas> -->
+
+    <script>
+        // var c = document.getElementById("myCanvas");
+        // var ctx = c.getContext("2d");
+        // var img = document.getElementById("tulip");
+        // window.onload = function() {
+        //     ctx.drawImage(img, 0, 0);
+        // }
+    </script>
+    <script>
+        var img = new Image();
+        img.src = '/static/images/joi/joiInRain.jpg'
+
+        console.log(img.width)
+        var table = document.getElementById('table'),
+            context = table.getContext('2d');
+
+        document.getElementById('testh1').addEventListener('click', function() {
+            var width = img.width,
+                height = img.height;
+            context.drawImage(img, 0, 0, 300, 200)
+            context.font = "20px Georgia";
+            context.fillStyle = 'white'
+            context.fillText("SAY HELLO", 10, 50);
+        })
+
+        // 绘制图片
+
+        // 绘制表格
+        // var width = 400,
+        //     height = 400;
+        // for (var i = 0; i <= width; i = i + 40) {
+        //     context.moveTo(i, 1);
+        //     context.lineTo(i, height);
+        //     context.stroke();
+        // }
+
+        // for (var i = 0; i <= height; i = i + 40) {
+        //     context.moveTo(1, i);
+        //     context.lineTo(width, i);
+        //     context.stroke();
+        // }
+    </script>
+
 
     <script src="/static/samples/test/js/test.js"></script>
-    <script>
-        $(function() {
-            $('#btnDel').click(function() {
-                $.ajax({
-                    type: 'get',
-                    // url: '/api/testDb',
-                    // url: '/api/createTest',
-                    url: '/api/deleteTest',
-                    // url: '/api/products',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                    }
-                })
 
-            })
-            $('#btn').click(function() {
-                $.ajax({
-                    type: 'get',
-                    url: '/api/createTest',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                    }
-                })
-            })
-            $('#testLog').click(function() {
-                $.ajax({
-                    type: 'get',
-                    url: '/api/testLog',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                    }
-                })
-            })
-            $('#cros').click(function() {
-                console.log('say cros')
-                    // $.ajax({
-                    //     type: 'get',
-                    //     url: 'http://localhost:3002',
-                    //     dataType: 'jsonp',
-                    //     success: function(data) {
-                    //         console.log(data)
-                    //     }
-                    // })
-                $.ajax({　　　　　　
-                    'url': 'http://localhost:3002',
-                    'method': 'get',
-                    'dataType': 'jsonp',
-                    'data': {},
-                    'success': function(data) {　　　　　　　　
-                        console.log(data);　　　　　　
-                    }　　　　
-                });
-            })
-            $('#getDoubanBook').click(function() {
-                $.ajax({
-                    'url': ''
-                })
-            })
-
-        })
-    </script>
 </body>
 
 </html>

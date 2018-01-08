@@ -44,21 +44,25 @@
         height: 100%;
         overflow: hidden;
     }
+    
+    #table {
+        display: none;
+    }
 </style>
 <div id="box">
-    <h2 id="startVideo">start video</h2>
+    <!-- <h2 id="startVideo">start video</h2> -->
     <audio id="joiBootMusic" src="/static/videos/joi.mp3"></audio>
     <button id="getVideoBtn" class="btn btn-primary">获取视频</button>
     <button id="joiBootMusicBtn" class="btn btn-primary">开机音乐</button>
     <!-- Button trigger modal -->
     <button id="getImgBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#getImgModal">
         获取图片
-      </button>
-    <!-- <button id="obtainImgBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#getImgModal">
-            抓取图片
-          </button> -->
+    </button>
+    <button id="drawImgBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#drawImgModal">
+            生成图片
+    </button>
 
-    <!-- Modal -->
+    <!-- Modal begin-->
     <div class="modal fade" id="getImgModal" tabindex="-1" role="dialog" aria-labelledby="getImgModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -83,12 +87,39 @@
             </div>
         </div>
     </div>
+    <!-- Modal end-->
+
+    <!-- draw-Modal begin-->
+    <div class="modal fade drawImgModal" id="drawImgModal" tabindex="-1" role="dialog" aria-labelledby="drawImgModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="drawImgModalLabel">words</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">des</span>
+                        <input id="drawText" type="text" class="form-control" placeholder="text" aria-describedby="sizing-addon1">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="drawImgConfirm" type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- draw-Modal end-->
 
     <div id="videoContainer">
+        <!-- <canvas id="table"></canvas> -->
         <!-- <img src="/static/images/joi/joi.jpg" alt=""> -->
         <!-- <video id="video" controls="controls"></video> -->
         <!-- <video id="video" src="/static/videos/testVideo.mp4" controls="controls"></video> -->
     </div>
+    <canvas id="table"></canvas>
 </div>
 <script>
     $(function() {
@@ -148,6 +179,51 @@
 
             }
         })
+
+        // 绘制canvas
+        /***
+        canvas文本换行函数
+        **/
+        function drawText(txt, ccontext, begin_width, begin_height) {
+
+
+        }
+        var img = new Image();
+        img.src = '/static/images/joi/doge.png'
+
+        var table = document.getElementById('table'),
+            context = table.getContext('2d');
+        table.width = 300;
+        table.height = 300;
+        $('#drawImgBtn').click(function() {
+            $('#videoContainer').empty()
+
+        })
+        $('#drawImgConfirm').click(function() {
+
+            var txt = $('#drawText').val();
+            console.log(txt);
+            var width = 300,
+                height = 300;
+            context.drawImage(img, 0, 0, 300, 300)
+
+            context.font = "20px Georgia";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = 'white'
+            context.fillText(txt, 150, 150);
+
+            var finalImg = new Image();
+            finalImg.src = table.toDataURL("image/png");
+            // 清空canvas,生成图片
+            $('#videoContainer').empty()
+            $('#videoContainer').append(finalImg)
+            $('#drawImgModal').modal('toggle')
+
+        })
+
+
+
 
 
         function joiTimestamp() {

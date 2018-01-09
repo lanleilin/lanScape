@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/samples/test/css/test.css">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/samples/test/css/test.css">
     <style>
         #box {
             width: 100%;
@@ -19,71 +19,25 @@
             height: 80%;
             margin-left: -180px;
         }
+        
+        .selectAddress:hover {
+            background: lightgray;
+        }
     </style>
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/vue.min.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/vue.min.js"></script>
+    <script src="../../static/js/bootstrap.js"></script>
 </head>
 
 <body>
-    <div id="box">
-        <a href="./index.html">go to index</a>
-        <h1 id="testh1">this is test</h1>
-        <canvas id="table"></canvas>
-    </div>
-    <!-- <p>要使用的图像：</p>
-    <img id="tulip" src="/static/images/joi/joiInRain.jpg" alt="The Tulip" />
 
-    <p>画布：</p>
-    <canvas id="myCanvas" width="500" height="300" style="border:1px solid #d3d3d3;background:#ffffff;">
-	Your browser does not support the HTML5 canvas tag.
-	</canvas> -->
 
     <script>
-        // var c = document.getElementById("myCanvas");
-        // var ctx = c.getContext("2d");
-        // var img = document.getElementById("tulip");
-        // window.onload = function() {
-        //     ctx.drawImage(img, 0, 0);
-        // }
-    </script>
-    <script>
-        var img = new Image();
-        img.src = '/static/images/joi/joiInRain.jpg'
-
-        console.log(img.width)
-        var table = document.getElementById('table'),
-            context = table.getContext('2d');
-
-        document.getElementById('testh1').addEventListener('click', function() {
-            var width = img.width,
-                height = img.height;
-            context.drawImage(img, 0, 0, 300, 200)
-            context.font = "20px Georgia";
-            context.fillStyle = 'white'
-            context.fillText("SAY HELLO", 10, 50);
-        })
-
-        // 绘制图片
-
-        // 绘制表格
-        // var width = 400,
-        //     height = 400;
-        // for (var i = 0; i <= width; i = i + 40) {
-        //     context.moveTo(i, 1);
-        //     context.lineTo(i, height);
-        //     context.stroke();
-        // }
-
-        // for (var i = 0; i <= height; i = i + 40) {
-        //     context.moveTo(1, i);
-        //     context.lineTo(width, i);
-        //     context.stroke();
-        // }
     </script>
 
 
-    <script src="/static/samples/test/js/test.js"></script>
+
+    <script src="../../static/samples/test/js/test.js"></script>
 
 </body>
 

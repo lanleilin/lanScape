@@ -185,7 +185,32 @@
         canvas文本换行函数
         **/
         function drawText(txt, ccontext, begin_width, begin_height) {
+            var gap = 25;
+            var txtArr = [];
+            var txtArr1 = [];
 
+            context.font = "20px Georgia";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = 'white'
+            console.log()
+            console.log(txt.length)
+            if (txt.length <= 12) {
+                context.fillText(txt, 150, 150);
+            } else {
+                for (var i = 0; i < txt.length; i++) {
+                    if (i % 12 == 0) {
+                        txtArr.push(txt.slice(i, i + 12))
+                    }
+                }
+                console.log(txtArr)
+                var x = 150 - txtArr.length * 10
+                for (var j = 0; j < txtArr.length; j++) {
+                    context.fillText(txtArr[j], 150, gap * j + x);
+
+                }
+                // context.fillText(txt, 150 + gap, 150);
+            }
 
         }
         var img = new Image();
@@ -207,11 +232,12 @@
                 height = 300;
             context.drawImage(img, 0, 0, 300, 300)
 
-            context.font = "20px Georgia";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-            context.fillStyle = 'white'
-            context.fillText(txt, 150, 150);
+            // context.font = "20px Georgia";
+            // context.textAlign = "center";
+            // context.textBaseline = "middle";
+            // context.fillStyle = 'white'
+            // context.fillText(txt, 150, 150);
+            drawText(txt, context);
 
             var finalImg = new Image();
             finalImg.src = table.toDataURL("image/png");

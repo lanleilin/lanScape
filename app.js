@@ -20,7 +20,6 @@ const wsTest=require('./middlewares/wsTest')
 const app = new Koa();
 
 // app.use(wsTest())
-wsTest()
 
 // log request URL:
 app.use(async(ctx, next) => {
@@ -158,12 +157,14 @@ function onMessage(message) {
     }
 }
 
-function onClose() {
-    let user = this.user;
-    let msg = createMessage('left', user, `${user.name} is left.`);
-    this.wss.broadcast(msg);
-}
+// function onClose() {
+//     let user = this.user;
+//     let msg = createMessage('left', user, `${user.name} is left.`);
+//     this.wss.broadcast(msg);
+// }
+// wsTest.onClose
 
-app.wss = createWebSocketServer(server, onConnect, onMessage, onClose);
+// app.wss = createWebSocketServer(server, onConnect, onMessage, onClose);
+app.wss = createWebSocketServer(server, onConnect, onMessage, wsTest.onClose);
 
 console.log('app started at port 3001...');

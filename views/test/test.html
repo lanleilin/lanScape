@@ -30,9 +30,19 @@
 </head>
 
 <body>
-
+    <button id="btn">btnalfjalkf</button>
+    <input id="ipt" placeholder="balalal"/>
 
     <script>
+        $(function(){
+            $('#ipt').on('keyup',function(e){
+                console.log(e.keyCode)
+            })
+            $('#btn').click(function(){
+                console.log(this)
+                console.log(this.id)
+            })
+        })
     </script>
 
 

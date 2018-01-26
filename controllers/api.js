@@ -65,9 +65,10 @@ module.exports = {
         }
     },
     // read text test
-    "GET /api/testLog": async(ctx, next) => {
+    "GET /api/testLog/:num": async(ctx, next) => {
+        var n=ctx.params.num;
         ctx.rest({
-            txt: 'this is test text'
+            txt: `this is test and posted ${n}`
         });
     },
     // 爬取图片

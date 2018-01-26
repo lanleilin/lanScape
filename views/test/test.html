@@ -14,12 +14,12 @@
             height: 100%;
             overflow: hidden;
         }
-        
+
         #testh1 img {
             height: 80%;
             margin-left: -180px;
         }
-        
+
         .selectAddress:hover {
             background: lightgray;
         }
@@ -31,16 +31,25 @@
 
 <body>
     <button id="btn">btnalfjalkf</button>
-    <input id="ipt" placeholder="balalal"/>
+    <input id="ipt" placeholder="balalal" />
 
     <script>
-        $(function(){
-            $('#ipt').on('keyup',function(e){
+        $(function () {
+            $('#ipt').on('keyup', function (e) {
                 console.log(e.keyCode)
             })
-            $('#btn').click(function(){
-                console.log(this)
-                console.log(this.id)
+            $('#btn').click(function () {
+                var num=123;
+                $.ajax({
+                    method:'get',
+                    url:`/api/testLog/${num}`,
+                    dataType:'json',
+                    success:function(res){
+                        console.log('success')
+                        console.log(res)
+                    }
+                })
+
             })
         })
     </script>

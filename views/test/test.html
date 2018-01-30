@@ -30,28 +30,46 @@
 </head>
 
 <body>
-    <button id="btn">btnalfjalkf</button>
-    <input id="ipt" placeholder="balalal" />
+    <!-- <button id="btn">btnalfjalkf</button>
+    <input id="ipt" placeholder="balalal" /> -->
+    <div id="example">
+        <p>初始 message 是："{{ message }}"</p>
+        <p>计算后的翻转 message 是："{{ reversedMessage }}"</p>
+    </div>
 
     <script>
-        $(function () {
-            $('#ipt').on('keyup', function (e) {
-                console.log(e.keyCode)
-            })
-            $('#btn').click(function () {
-                var num=123;
-                $.ajax({
-                    method:'get',
-                    url:`/api/testLog/${num}`,
-                    dataType:'json',
-                    success:function(res){
-                        console.log('success')
-                        console.log(res)
-                    }
-                })
-
-            })
+        var vm = new Vue({
+            el: '#example',
+            data: {
+                message: 'Hello'
+            },
+            computed: {
+                // 一个 computed 属性的 getter 函数
+                reversedMessage: function () {
+                    // `this` 指向 vm 实例
+                    return this.message.split('').reverse().join('')
+                }
+            }
         })
+        // $(function () {
+
+        //     $('#ipt').on('keyup', function (e) {
+        //         console.log(e.keyCode)
+        //     })
+        //     $('#btn').click(function () {
+        //         var num=123;
+        //         $.ajax({
+        //             method:'get',
+        //             url:`/api/testLog/${num}`,
+        //             dataType:'json',
+        //             success:function(res){
+        //                 console.log('success')
+        //                 console.log(res)
+        //             }
+        //         })
+
+        //     })
+        // })
     </script>
 
 

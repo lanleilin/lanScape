@@ -10,64 +10,56 @@
 </head>
 
 <body>
-  <h1>ts</h1>
+  <h1 id="testlog">ts</h1>
   <script>
-    // var vm = new Vue({
-    //   data: {
-    //     qqq: {
-    //       a: 1
-    //     }
-    //   },
-    //   created() {
-    //     console.log(this.qqq)
-    //   }
-    // })
-    // var book={}
-    // Object.defineProperty(book,'name',{
-    //   set:function(value){
-    //     name=value;
-    //     console.log(`tttttt${value}`)
-    //   },
-    //   get:function(){
-    //     return `和你讲讲我们的天父，${name}`
-    //   }
-    // })
-    // book.name='克苏鲁'
-    // console.log(book.name)
+    let _self = {}
+    const actions = new Map([
+      [{
+        identity: 'guest',
+        status: 1
+      }, () => {
+        console.log('ggggg 11111')
+      }],
+      [{
+        identity: 'guest',
+        status: 2
+      }, () => {
+        console.log('ggggg 2222222')
 
-    function defineReactive(data, key, val) {
-      observe(val); // 递归遍历所有子属性
-      Object.defineProperty(data, key, {
-        enumerable: true,
-        configurable: true,
-        get: function () {
-          return val;
-        },
-        set: function (newVal) {
-          val = newVal;
-          console.log('属性' + key + '已经被监听了，现在值为：“' + newVal.toString() + '”');
-        }
-      });
+      }],
+      ['default', () => {
+        console.log('ggggg dddddddd')
+      }]
+      //...
+    ])
+
+    _self.onButtonClick = (identity, status) => {
+      let action = [...actions].filter(([key, value]) => (key.identity == identity && key.status == status))
+      console.log('action', action)
+      action.forEach(([key, value]) => value.call(this))
+    }
+    var ts = document.querySelector('#testlog')
+    ts.addEventListener('click', function () {
+      _self.onButtonClick('guest22', 1)
+    })
+
+
+    const actions = () => {
+      const functionA = () => { /*do sth*/ }
+      const functionB = () => { /*do sth*/ }
+      const functionC = () => { /*send log*/ }
+      return new Map([
+        [/^guest_[1-4]$/, functionA],
+        [/^guest_5$/, functionB],
+        [/^guest_.*$/, functionC],
+        //...
+      ])
     }
 
-    function observe(data) {
-      if (!data || typeof data !== 'object') {
-        return;
-      }
-      Object.keys(data).forEach(function (key) {
-        defineReactive(data, key, data[key]);
-      });
-    };
-
-    var library = {
-      book1: {
-        name: ''
-      },
-      book2: ''
-    };
-    observe(library);
-    library.book1.name = 'vue权威指南'; // 属性name已经被监听了，现在值为：“vue权威指南”
-    library.book2 = '没有此书籍'; // 属性book2已经被监听了，现在值为：“没有此书籍”
+    const onButtonClick = (identity, status) => {
+      let action = [...actions()].filter(([key, value]) => (key.test(`${identity}_${status}`)))
+      action.forEach(([key, value]) => value.call(this))
+    }
   </script>
 </body>
 

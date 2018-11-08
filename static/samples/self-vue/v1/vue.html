@@ -5,16 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Vue</title>
 </head>
 
 <body>
   <h1 id="name">{{name}}</h1>
 </body>
 <script>
-  // Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者
+  // 监听器Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者
   function Observer(data) {
     this.data = data;
+    // 遍历data
     this.walk(data);
   }
   Observer.prototype = {
@@ -53,6 +54,23 @@
     }
     return new Observer(value);
   };
+
+  // mock
+  function observe(value,vm){
+    if(!value || typeof value !== 'object'){
+      return
+    }
+    return new Observer(value)
+  }
+  function Observer(data){
+    this.data=data
+    this.walk(data)
+  }
+  Observer.prototype={
+    walk:function(data){
+
+    }
+  }
   // 订阅器Dep，订阅器Dep主要负责收集订阅者，然后再属性变化的时候执行对应订阅者的更新函数
   function Dep() {
     this.subs = [];
@@ -68,7 +86,7 @@
     }
   };
   Dep.target = null;
-  // watcher
+  // 订阅者Watcher，可以收到属性的变化通知并执行相应的函数，从而更新视图
   function Watcher(vm, exp, cb) {
     this.cb = cb;
     this.vm = vm;

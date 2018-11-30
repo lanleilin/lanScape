@@ -135,10 +135,6 @@ module.exports = {
                 updatedAt: now,
                 version: 0
             });
-            // 发送邮件
-            // RHEMAILSDK_instance.send('2476081528@qq.com', '新增收藏' + name, JSON.stringify(dog), function(e) {
-            //     console.log(e);
-            // });
             console.log('created: ' + JSON.stringify(dog));
             // 写入txt
             fs.writeFile('static/text/output.txt', JSON.stringify(dog), function(err) {

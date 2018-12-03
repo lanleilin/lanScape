@@ -8,8 +8,6 @@ const templating = require('./middlewares/templating');
 
 const rest = require('./middlewares/rest');
 
-const RHEMAILSDK = require('./middlewares/RHEMAILSDK');
-
 const Cookies = require('cookies');
 const url = require('url');
 const ws = require('ws');

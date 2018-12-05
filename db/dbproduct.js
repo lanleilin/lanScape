@@ -1,5 +1,5 @@
 // store products as database:
-// 操作mydogs pet表
+// 操作 joi_db pet 表
 const fs = require('fs')
 
 var id = 0;

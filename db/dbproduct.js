@@ -9,12 +9,15 @@ function nextId() {
     return 'p' + id;
 }
 
-function Product(id, name, manufacturer, price) {
+function Product(id, name, manufacturer, price,createdAt,updatedAt,version) {
     // this.id = nextId();
     this.id = id;
     this.name = name;
     this.manufacturer = manufacturer;
     this.price = price;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.version = version;
 }
 
 
@@ -64,7 +67,7 @@ module.exports = {
             console.log(`find ${pets.length} pets:`);
             products = [];
             for (let p of pets) {
-                var str = new Product(p.id, p.name, p.description, p.address);
+                var str = new Product(p.id, p.name, p.description, p.address, p.createdAt,p.updatedAt,p.version);
                 products.push(str)
             }
 

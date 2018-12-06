@@ -69,9 +69,7 @@
         });
 
         $.getJSON('/api/products').done(function(data) {
-            console.log(data)
-            console.log(data.products)
-
+            console.log('data',data)
             vm.products = data.products;
         }).fail(function(jqXHR, textStatus) {
             alert('Error: ' + jqXHR.status);

@@ -15,9 +15,9 @@ function Product(id, name, manufacturer, price,createdAt,updatedAt,version) {
     this.name = name;
     this.manufacturer = manufacturer;
     this.price = price;
-    this.createdAt = createdAt|| null;
-    this.updatedAt = updatedAt|| null;
-    this.version = version || null;
+    this.createdAt = createdAt|| 0;
+    this.updatedAt = updatedAt|| 0;
+    this.version = version || 0;
 }
 
 

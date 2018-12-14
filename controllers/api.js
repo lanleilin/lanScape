@@ -12,6 +12,7 @@ module.exports = {
         ctx.rest({
             products: products.getProducts()
         });
+        console.log('gggggggggggggggggggget products',products.getProducts())
     },
     "GET /api/testTxt": async(ctx, next) => {
         ctx.rest({

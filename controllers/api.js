@@ -2,9 +2,9 @@ const fs = require('fs');
 const products = require("../db/dbproduct");
 const test = require("../db/dbTest");
 const imgCrawler = require("../db/imgCrawler");
+const mockGroup = require("../db/mockGroup");
 // jsonp
 const urllib = require('url');
-
 const APIError = require("../middlewares/rest").APIError;
 
 module.exports = {
@@ -13,6 +13,12 @@ module.exports = {
             products: products.getProducts()
         });
         console.log('gggggggggggggggggggget products',products.getProducts())
+    },
+    "GET /api/groups/:id": async(ctx, next) => {
+        ctx.rest({
+            groups: mockGroup[ctx.params.id],
+            id:`groups ${ctx.params.id}` 
+        });
     },
     "GET /api/testTxt": async(ctx, next) => {
         ctx.rest({

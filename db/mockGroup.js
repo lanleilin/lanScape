@@ -121,5 +121,20 @@ module.exports={
         time: 'from this day,until my last day'
       }
     }
+  ],
+  timeLineA: [
+    {
+      status: 'done',
+      time: 1545104763137,
+      stage: 'vary happy start'
+    }, {
+      status: 'done',
+      time: 1545104763137,
+      stage: 'happy middle'
+    }, {
+      status: 'pending',
+      time: 1545104763137,
+      stage: 'there are no happy endings'
+    }
   ]
 }

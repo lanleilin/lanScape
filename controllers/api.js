@@ -14,7 +14,12 @@ module.exports = {
         });
         console.log('gggggggggggggggggggget products',products.getProducts())
     },
-    "GET /api/groups/:id": async(ctx, next) => {
+    "GET /api/timeline": async(ctx, next) => {
+        ctx.rest({
+          timeline: mockGroup['timeLineA']
+        });
+    },
+    "GET /api/timeline/:id": async(ctx, next) => {
         ctx.rest({
             groups: mockGroup[ctx.params.id],
             id:`groups ${ctx.params.id}` 
@@ -33,6 +38,12 @@ module.exports = {
             ctx.request.body.price
         );
         ctx.rest(p);
+    },
+    "POST /api/updateTimeline": async(ctx, next) => {
+        let newLine=ctx.request.body
+        // mock
+        mockGroup['timeLineA']=newLine
+        ctx.rest(mockGroup['timeLineA'])
     },
 
     "DELETE /api/products/:id": async(ctx, next) => {

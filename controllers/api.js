@@ -35,7 +35,8 @@ module.exports = {
         var p = products.createProduct(
             ctx.request.body.name,
             ctx.request.body.manufacturer,
-            ctx.request.body.price
+            ctx.request.body.price,
+            ctx.request.body.timeline
         );
         ctx.rest(p);
     },

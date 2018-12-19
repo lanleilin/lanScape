@@ -9,7 +9,7 @@ function nextId() {
     return 'p' + id;
 }
 
-function Product(id, name, manufacturer, price,createdAt,updatedAt,version) {
+function Product(id, name, manufacturer, price,createdAt,updatedAt,version,timeline) {
     // this.id = nextId();
     this.id = id;
     this.name = name;
@@ -18,6 +18,7 @@ function Product(id, name, manufacturer, price,createdAt,updatedAt,version) {
     this.createdAt = createdAt|| 0;
     this.updatedAt = updatedAt|| 0;
     this.version = version || 0;
+    this.timeline = timeline || '';
 }
 
 
@@ -48,7 +49,8 @@ var Pet = sequelize.define('pet', {
     address: Sequelize.STRING(500),
     createdAt: Sequelize.BIGINT,
     updatedAt: Sequelize.BIGINT,
-    version: Sequelize.BIGINT
+    version: Sequelize.BIGINT,
+    timeline: Sequelize.STRING(30000)
 }, {
     timestamps: false
 });
@@ -67,7 +69,7 @@ module.exports = {
             console.log(`find ${pets.length} pets:`);
             products = [];
             for (let p of pets) {
-                let str = new Product(p.id, p.name, p.description, p.address, p.createdAt,p.updatedAt,p.version);
+                let str = new Product(p.id, p.name, p.description, p.address, p.createdAt,p.updatedAt,p.version,p.timeline);
                 products.push(str)
             }
 
@@ -126,7 +128,7 @@ module.exports = {
         // return rs;
 
     },
-    createProduct: (name, manufacturer, price) => {
+    createProduct: (name, manufacturer, price,timeline) => {
         // 存入
         var now = Date.now();
         var id = 'd-' + now;
@@ -139,7 +141,8 @@ module.exports = {
                 address: price,
                 createdAt: now,
                 updatedAt: now,
-                version: 0
+                version: 0,
+                timeline: timeline
             });
             console.log('created: ' + JSON.stringify(dog));
             // 写入txt

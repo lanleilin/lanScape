@@ -79,6 +79,23 @@ module.exports = {
         console.log('pppppppppppppppppppppppppppproducts',products)
         return products;
     },
+    getTimeline: (id) => {
+        (async() => {
+            var pets = await Pet.findAll({
+                where: {
+                    id: id
+                }
+            });
+            console.log(`find ${pets.length} pets:`);
+            products = [];
+            for (let p of pets) {
+                let str = new Product(p.id, p.name, p.description, p.address, p.createdAt,p.updatedAt,p.version,p.timeline);
+                products.push(str)
+            }
+
+        })();
+        return products;
+    },
 
     getProduct: (id) => {
         var i;

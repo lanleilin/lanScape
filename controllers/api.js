@@ -20,8 +20,13 @@ module.exports = {
         });
     },
     "GET /api/timeline/:id": async(ctx, next) => {
+        let _line=products.getTimeline(ctx.params.id)
+        console.log('apiiiiiiiiiiii',ctx.params.id)
         ctx.rest({
-            groups: mockGroup[ctx.params.id],
+            code:'1',
+            msg:'success',
+            // timeline: mockGroup['timeLineA'],
+            timeline: _line,
             id:`groups ${ctx.params.id}` 
         });
     },
@@ -44,7 +49,12 @@ module.exports = {
         let newLine=ctx.request.body
         // mock
         mockGroup['timeLineA']=newLine
-        ctx.rest(mockGroup['timeLineA'])
+        // ctx.rest(mockGroup['timeLineA'])
+        ctx.rest({
+          code:'1',
+          msg:'success',
+          data:mockGroup['timeLineA']
+        })
     },
 
     "DELETE /api/products/:id": async(ctx, next) => {

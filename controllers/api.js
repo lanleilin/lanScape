@@ -27,7 +27,7 @@ module.exports = {
             msg:'success',
             // timeline: mockGroup['timeLineA'],
             timeline: _line,
-            id:`groups ${ctx.params.id}` 
+            id:`lineId ${ctx.params.id}` 
         });
     },
     "GET /api/testTxt": async(ctx, next) => {
@@ -49,11 +49,19 @@ module.exports = {
         let newLine=ctx.request.body
         // mock
         mockGroup['timeLineA']=newLine
-        // ctx.rest(mockGroup['timeLineA'])
+        // ctx.rest({
+        //   code:'1',
+        //   msg:'success',
+        //   data:mockGroup['timeLineA']
+        // })
+        // real
+        console.log('444444444444444444444444444444444',ctx.request.body)
+        let _id=ctx.request.body.id
+        let _timeline=ctx.request.body.timeline
+        console.log('55555555555555555555555555555',ctx.request.body)
+        let t=products.updateTimeline(_id,_timeline)
         ctx.rest({
-          code:'1',
-          msg:'success',
-          data:mockGroup['timeLineA']
+          update:t
         })
     },
 

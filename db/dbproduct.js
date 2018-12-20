@@ -20,7 +20,9 @@ function Product(id, name, manufacturer, price,createdAt,updatedAt,version,timel
     this.version = version || 0;
     this.timeline = timeline || '';
 }
-
+function Timeline(timeline){
+  this.timeline=timeline || ''
+}
 
 var products = [];
 
@@ -76,9 +78,9 @@ module.exports = {
         })();
         // let str = new Product('p.id', 'p.name', 'p.description', 'p.address', 'p.createdAt','p.updatedAt',);
         // products.push(str)
-        console.log('pppppppppppppppppppppppppppproducts',products)
         return products;
     },
+    // 搜索timeline
     getTimeline: (id) => {
         (async() => {
             var pets = await Pet.findAll({
@@ -86,15 +88,14 @@ module.exports = {
                     id: id
                 }
             });
-            console.log(`find ${pets.length} pets:`);
-            products = [];
+            lines = [];
             for (let p of pets) {
-                let str = new Product(p.id, p.name, p.description, p.address, p.createdAt,p.updatedAt,p.version,p.timeline);
-                products.push(str)
+                let str = new Timeline(p.timeline);
+                lines.push(str)
             }
 
         })();
-        return products;
+        return lines;
     },
 
     getProduct: (id) => {
@@ -180,7 +181,6 @@ module.exports = {
         return p;
     },
     updateProduct: (id) => {
-
         (async() => {
             var pets = await Pet.findAll({
                 where: {
@@ -191,15 +191,29 @@ module.exports = {
                 await p.destroy();
             }
         })();
-
         return products;
-
-        return null;
+    },
+    // 更新timeline
+    updateTimeline: (id,timeline) => {
+        let _newline={
+          'timeline':timeline
+        }
+        try {
+          (async() => {
+            await Pet.update(
+              _newline,
+              {
+                where: {'id': id}
+              }
+            )
+          })();
+        } catch (error) {
+            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerror',error)
+        }
+        return products;
     },
 
     deleteProduct: (id) => {
-
         return products;
-        return null;
     }
 };

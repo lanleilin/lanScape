@@ -49,23 +49,38 @@ module.exports = {
         ctx.rest(p);
     },
     "POST /api/updateTimeline": async(ctx, next) => {
-        let newLine=ctx.request.body
+        // let newLine=ctx.request.body
         // mock
-        mockGroup['timelineA']=newLine
+        // mockGroup['timelineA']=newLine
         // ctx.rest({
         //   code:'1',
         //   msg:'success',
         //   data:mockGroup['timelineA']
         // })
         // real
-        console.log('444444444444444444444444444444444',ctx.request.body)
         let _id=ctx.request.body.id
         let _timeline=ctx.request.body.timeline
-        console.log('55555555555555555555555555555',ctx.request.body)
         let t=products.updateTimeline(_id,_timeline)
         ctx.rest({
           update:t
         })
+    },
+    "POST /api/updateGender": async(ctx, next) => {
+        let newLine=ctx.request.body
+        // mock
+        mockGroup['timelineA']=newLine
+        ctx.rest({
+          code:'1',
+          msg:'success',
+          data:mockGroup['timelineA']
+        })
+        // real
+        // let _id=ctx.request.body.id
+        // let _timeline=ctx.request.body.timeline
+        // let t=products.updateGender(_id,_timeline)
+        // ctx.rest({
+        //   update:t
+        // })
     },
 
     "DELETE /api/products/:id": async(ctx, next) => {

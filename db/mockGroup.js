@@ -122,7 +122,7 @@ module.exports={
       }
     }
   ],
-  timeLineA: [
+  timelineA:[
     {
       status: 'done',
       time: 1545104763137,

@@ -25,6 +25,7 @@ function Timeline(timeline){
 }
 
 var products = [];
+var lines = [];
 
 // 数据库
 const Sequelize = require('sequelize');
@@ -82,7 +83,9 @@ module.exports = {
     },
     // 搜索timeline
     getTimeline: (id) => {
-        (async() => {
+        
+        try {
+          (async() => {
             var pets = await Pet.findAll({
                 where: {
                     id: id
@@ -92,9 +95,12 @@ module.exports = {
             for (let p of pets) {
                 let str = new Timeline(p.timeline);
                 lines.push(str)
-            }
-
-        })();
+              }
+          })();
+        } catch (error) {
+          console.log(error)
+          return lines
+        }
         return lines;
     },
 
@@ -208,9 +214,10 @@ module.exports = {
             )
           })();
         } catch (error) {
-            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerror',error)
+            console.log(error)
+            return lines
         }
-        return products;
+        return lines;
     },
 
     deleteProduct: (id) => {

@@ -12,7 +12,11 @@ module.exports = {
         ctx.rest({
             products: products.getProducts()
         });
-        console.log('gggggggggggggggggggget products',products.getProducts())
+    },
+    "GET /api/groups/:id": async(ctx, next) => {
+        ctx.rest({
+          groups: mockGroup[ctx.params.id]
+        });
     },
     "GET /api/timeline": async(ctx, next) => {
         ctx.rest({
@@ -21,7 +25,6 @@ module.exports = {
     },
     "GET /api/timeline/:id": async(ctx, next) => {
         let _line=products.getTimeline(ctx.params.id)
-        console.log('apiiiiiiiiiiii',ctx.params.id)
         ctx.rest({
             code:'1',
             msg:'success',
@@ -66,9 +69,9 @@ module.exports = {
         })
     },
     "POST /api/updateGender": async(ctx, next) => {
-        let newLine=ctx.request.body
+        let newGnder=ctx.request.body
         // mock
-        mockGroup['timelineA']=newLine
+        console.log('111111111111111111111111111111',newGnder)
         ctx.rest({
           code:'1',
           msg:'success',

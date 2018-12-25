@@ -8,9 +8,9 @@ const urllib = require('url');
 const APIError = require("../middlewares/rest").APIError;
 
 module.exports = {
-    "GET /api/products": async(ctx, next) => {
+    "GET /api/products/:type": async(ctx, next) => {
         ctx.rest({
-            products: products.getProducts()
+            products: products.getProducts(ctx.params.type)
         });
     },
     "GET /api/groups/:id": async(ctx, next) => {
@@ -72,18 +72,16 @@ module.exports = {
         let newGnder=ctx.request.body
         // mock
         console.log('111111111111111111111111111111',newGnder)
-        ctx.rest({
-          code:'1',
-          msg:'success',
-          data:mockGroup['timelineA']
-        })
-        // real
-        // let _id=ctx.request.body.id
-        // let _timeline=ctx.request.body.timeline
-        // let t=products.updateGender(_id,_timeline)
         // ctx.rest({
-        //   update:t
+        //   code:'1',
+        //   msg:'success',
+        //   data:mockGroup['timelineA']
         // })
+        // real
+        let gender=products.updateGender(ctx.request.body)
+        ctx.rest({
+          msg:gender
+        })
     },
 
     "DELETE /api/products/:id": async(ctx, next) => {

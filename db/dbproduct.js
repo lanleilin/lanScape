@@ -62,11 +62,11 @@ var now = Date.now();
 
 
 module.exports = {
-    getProducts: () => {
+    getProducts: (type) => {
         (async() => {
             var pets = await Pet.findAll({
                 where: {
-                    gender: false
+                    gender: type
                 }
             });
             console.log(`find ${pets.length} pets:`);
@@ -75,10 +75,7 @@ module.exports = {
                 let str = new Product(p.id, p.name, p.description, p.address, p.createdAt,p.updatedAt,p.version,p.timeline);
                 products.push(str)
             }
-
         })();
-        // let str = new Product('p.id', 'p.name', 'p.description', 'p.address', 'p.createdAt','p.updatedAt',);
-        // products.push(str)
         return products;
     },
     // 搜索timeline
@@ -210,6 +207,26 @@ module.exports = {
               _newline,
               {
                 where: {'id': id}
+              }
+            )
+          })();
+        } catch (error) {
+            console.log(error)
+            return lines
+        }
+        return lines;
+    },
+    // 更新gender
+    updateGender: (param) => {
+        let _newGender={
+          'gender':param.type
+        }
+        try {
+          (async() => {
+            await Pet.update(
+              _newGender,
+              {
+                where: {'id': param.id}
               }
             )
           })();

@@ -6,8 +6,8 @@ flex布局、垂直居中、清除浮动、BFC、三栏布局、两栏布局、�
 继承、原型链、this指向、设计模式、call, apply, bind, new实现、防抖节流、let, var, const 区别、event、loop、promise使用及实现、promise并行执行和顺序执行、闭包、垃圾回收和内存泄漏、数组方法、数组乱序, 数组扁平化、事件委托、事件监听、事件模型、typescript
 #Vue:
 vue数据双向绑定原理、vue computed原理、vue编译器结构图、生命周期、vue组件通信、mmvm模式、mvc模式理解、vue dom diff、vuex、vue-router
-#react：
-dom-diff、列表key属性、jsx原理(createElement)、react-router原理、redux原理、生命周期、react setState、react组件通信、性能优化
+如何解决getter/setter不能监听数组变异方法，监听的回调和事件怎么解耦的，watcher去重怎么做的，DOM批更新怎么做的，DOM diff原理
+
 #网络：
 HTTP1, HTTP2, HTTPS、浏览从输入网址到回车发生了什么、前端跨域、浏览器缓存、cookie, session, token, localstorage, sessionstorage、状态码、TCP连接(三次握手, 四次挥手)
 
@@ -29,11 +29,20 @@ https://www.cnblogs.com/ranyonsue/p/11201730.html
 面试公司：彩讯股份
 公司地点：深圳市南山区科苑南路3176号彩讯科创中心31楼
 交通状况：1号线深大C口
-# 2020-08-12 下午16:30
+# 2020-08-12 周三下午16:30
 面试公司：找靓机
 面试时间：2020年8月12日（周三）15:00
 公司地点：深圳市福田区深圳文化创意园A1座2F（找靓机）
 交通状况：地铁站：7号线（沙尾站B出口约400米)；公交站有：沙尾/新洲村
+# 2020-08-13 周四上午10:30
+面试公司：跨越速运
+公司地点：广东省深圳市宝安区航站四路汉莎航空园在地图中查看区A栋3楼
+交通状况：1号线后瑞站D出口
+# 2020-08-13 周四下午15:00
+面试公司：深圳金蝶账无忧网络科技有限公司
+公司地点：深圳市南山区科技园科技南路12路2号金蝶软件园B栋
+联系人：刘泽纯
+联系电话：0755-86071563
 
 #寄生组合继承和extends继承的区别
 ES5 寄生组合继承

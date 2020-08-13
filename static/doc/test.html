@@ -1,0 +1,165 @@
+<!DOCTYPE>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>拖拽排序</title>
+  <style>
+    ul {
+      list-style: none;
+      margin: 200px;
+    }
+
+    li {
+      width: 100%;
+      height: 40px;
+      border: 1px solid #999;
+      background: lightblue;
+      margin-top: 2px;
+      border-radius: 10px;
+      padding-left: 10px;
+      color: white;
+      cursor: move;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="ordered-container">
+    <!-- <li class="ele" draggable="true">1</li>
+    <li class="ele" draggable="true">2</li>
+    <li class="ele" draggable="true">3</li>
+    <li class="ele" draggable="true">4</li> -->
+  </ul>
+  <script>
+    var data = [{
+        label: "Item 1"
+      }, {
+        label: "Item 2"
+      }, {
+        label: "Item 3"
+      },
+      {
+        label: "Item 4"
+      }
+    ]
+
+    var node = document.querySelector("#ordered-container");
+    for (var i = 0; i < data.length; i++) {
+      var listNode = document.createElement("LI");
+      var textnode = document.createTextNode(data[i].label);
+      listNode.appendChild(textnode);
+      listNode.setAttribute('className', 'ele')
+      listNode.setAttribute('draggable', true)
+      node.appendChild(listNode);
+    }
+    var draging = null;
+    //使用事件委托，将li的事件委托给ul
+    node.ondragstart = function (event) {
+      event.dataTransfer.setData("te", event.target.innerText);
+      draging = event.target;
+    }
+    node.ondragover = function (event) {
+      event.preventDefault();
+      var target = event.target;
+      if (target.nodeName === "LI") {
+        if (target !== draging) {
+          var targetRect = target.getBoundingClientRect();
+          var dragingRect = draging.getBoundingClientRect();
+          if (target) {
+            if (target.animated) {
+              return;
+            }
+          }
+          if (_index(draging) < _index(target)) {
+            target.parentNode.insertBefore(draging, target.nextSibling);
+          } else {
+            target.parentNode.insertBefore(draging, target);
+          }
+          _animate(dragingRect, draging);
+          _animate(targetRect, target);
+          readNode()
+        }
+      }
+
+    }
+
+    function readNode() {
+      var changedNode = document.querySelector("#ordered-container")
+      console.log('changedNode', changedNode)
+    }
+
+    function nodeToFragment(el) {
+      var fragment = document.createDocumentFragment();
+      var child = el.firstChild;
+      while (child) {
+        // 将Dom元素移入fragment中
+        fragment.appendChild(child);
+        child = el.firstChild
+      }
+      return fragment;
+    }
+    //获取元素在父元素中的index
+    function _index(el) {
+      var index = 0;
+
+      if (!el || !el.parentNode) {
+        return -1;
+      }
+
+      while (el && (el = el.previousElementSibling)) {
+        index++;
+      }
+
+      return index;
+    }
+
+    function _animate(prevRect, target) {
+      var ms = 300;
+      if (ms) {
+        var currentRect = target.getBoundingClientRect();
+        if (prevRect.nodeType === 1) {
+          prevRect = prevRect.getBoundingClientRect();
+        }
+        _css(target, 'transition', 'none');
+        _css(target, 'transform', 'translate3d(' +
+          (prevRect.left - currentRect.left) + 'px,' +
+          (prevRect.top - currentRect.top) + 'px,0)'
+        );
+        target.offsetWidth; // 触发重绘
+        _css(target, 'transition', 'all ' + ms + 'ms');
+        _css(target, 'transform', 'translate3d(0,0,0)');
+        clearTimeout(target.animated);
+        target.animated = setTimeout(function () {
+          _css(target, 'transition', '');
+          _css(target, 'transform', '');
+          target.animated = false;
+        }, ms);
+      }
+    }
+    //给元素添加style
+    function _css(el, prop, val) {
+      var style = el && el.style;
+
+      if (style) {
+        if (val === void 0) {
+          if (document.defaultView && document.defaultView.getComputedStyle) {
+            val = document.defaultView.getComputedStyle(el, '');
+          } else if (el.currentStyle) {
+            val = el.currentStyle;
+          }
+
+          return prop === void 0 ? val : val[prop];
+        } else {
+          if (!(prop in style)) {
+            prop = '-webkit-' + prop;
+          }
+
+          style[prop] = val + (typeof val === 'string' ? '' : 'px');
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

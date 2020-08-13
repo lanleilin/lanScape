@@ -1,103 +1,204 @@
-<!DOCTYPE>
-<html lang="zh-cn">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>拖拽排序</title>
-  <style>
-    ul {
-      list-style: none;
-      margin: 200px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  ul {
+    list-style: none;
+    margin: 200px;
+  }
 
-    li {
-      width: 100%;
-      height: 40px;
-      border: 1px solid #999;
-      background: lightblue;
-      margin-top: 2px;
-      border-radius: 10px;
-      padding-left: 10px;
-      color: white;
-      cursor: move;
-    }
-  </style>
+  li {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #999;
+    background: lightblue;
+    margin-top: 2px;
+    border-radius: 10px;
+    padding-left: 10px;
+    color: white;
+    cursor: move;
+  }
+</style>
 </head>
 
 <body>
   <ul id="ordered-container">
-    <!-- <li class="ele" draggable="true">1</li>
-    <li class="ele" draggable="true">2</li>
-    <li class="ele" draggable="true">3</li>
-    <li class="ele" draggable="true">4</li> -->
   </ul>
   <script>
     var data = [{
-        label: "Item 1"
-      }, {
-        label: "Item 2"
-      }, {
-        label: "Item 3"
-      },
-      {
-        label: "Item 4"
-      }
+      label: "Item 1"
+    }, {
+      label: "Item 2"
+    }, {
+      label: "Item 3"
+    },
+    {
+      label: "Item 4"
+    }
     ]
+    // 编写代码在 ordered-container 显示数据，而且子项可以通过拖拽来改变 data 子项的顺序
+    // 可以使用搜索引擎，希望写出的代码复用性好，覆盖更多边界条件
 
-    var node = document.querySelector("#ordered-container");
-    for (var i = 0; i < data.length; i++) {
-      var listNode = document.createElement("LI");
-      var textnode = document.createTextNode(data[i].label);
-      listNode.appendChild(textnode);
-      listNode.setAttribute('className', 'ele')
-      listNode.setAttribute('draggable', true)
-      node.appendChild(listNode);
+    // 实现思路 传入挂载元素id和数组，生成可拖动的List，获取元素在父元素中的index，拖动后插入到index之前
+    // 监听拖动事件结束后得到更改后的data 监听原data 若有改变更新到视图
+    function setupOrderedContainers(obj) {
+      var node = document.querySelector(obj.el);
+      initList(obj.data, node);
+      initDrag(node);
+      setTimeout(() => {
+          data[1].label='123'
+          console.log('data',data)
+      }, 2000);
     }
-    var draging = null;
-    //使用事件委托，将li的事件委托给ul
-    node.ondragstart = function (event) {
-      event.dataTransfer.setData("te", event.target.innerText);
-      draging = event.target;
+    setupOrderedContainers({
+      el: '#ordered-container',
+      data: data,
+    });
+
+    function initDrag(node) {
+      var draging = null;
+      //使用事件委托，将li的事件委托给ul
+      node.ondragstart = function (event) {
+        event.dataTransfer.setData("te", event.target.innerText);
+        draging = event.target;
+      }
+      node.ondragover = function (event) {
+        event.preventDefault();
+        var target = event.target;
+        if (target.nodeName === "LI") {
+          if (target !== draging) {
+            var targetRect = target.getBoundingClientRect();
+            var dragingRect = draging.getBoundingClientRect();
+            if (target) {
+              if (target.animated) {
+                return;
+              }
+            }
+            if (_index(draging) < _index(target)) {
+              target.parentNode.insertBefore(draging, target.nextSibling);
+            } else {
+              target.parentNode.insertBefore(draging, target);
+            }
+            _animate(dragingRect, draging);
+            _animate(targetRect, target);
+            Compile("#ordered-container");
+          }
+        }
+
+      }
+
     }
-    node.ondragover = function (event) {
-      event.preventDefault();
-      var target = event.target;
-      if (target.nodeName === "LI") {
-        if (target !== draging) {
-          var targetRect = target.getBoundingClientRect();
-          var dragingRect = draging.getBoundingClientRect();
-          if (target) {
-            if (target.animated) {
+    function Compile() {
+      var changedNode = document.querySelector("#ordered-container")
+      // compileElement(changedNode)
+      console.log('拖拽后的data', compileElement(changedNode))
+    }
+    function Observer(data) {
+      this.data = data;
+      // console.log('this', this)
+      this.walk(data);
+    }
+
+    Observer.prototype = {
+      walk: function (data) {
+        var self = this;
+        Object.keys(data).forEach(function (key) {
+          self.defineReactive(data, key, data[key]);
+        });
+      },
+      defineReactive: function (data, key, val) {
+        var dep = new Dep();
+        var childObj = observe(val);
+        Object.defineProperty(data, key, {
+          enumerable: true,
+          configurable: true,
+          get: function getter() {
+            if (Dep.target) {
+              dep.addSub(Dep.target);
+            }
+            return val;
+          },
+          set: function setter(newVal) {
+            if (newVal === val) {
               return;
             }
+            val = newVal;
+            dep.notify();
           }
-          if (_index(draging) < _index(target)) {
-            target.parentNode.insertBefore(draging, target.nextSibling);
-          } else {
-            target.parentNode.insertBefore(draging, target);
-          }
-          _animate(dragingRect, draging);
-          _animate(targetRect, target);
-          readNode()
+        });
+      }
+    };
+    function observe(value, vm) {
+      if (!value || typeof value !== 'object') {
+        return;
+      }
+      return new Observer(value);
+    };
+
+    function Dep() {
+      this.subs = [];
+    }
+    Dep.prototype = {
+      addSub: function (sub) {
+        this.subs.push(sub);
+      },
+      notify: function () {
+        this.subs.forEach(function (sub) {
+          sub.update();
+        });
+      }
+    };
+    Dep.target = null;
+    function Watcher(vm, exp, cb) {
+      this.cb = cb;
+      this.vm = vm;
+      this.exp = exp;
+      this.value = this.get();  
+    }
+
+    Watcher.prototype = {
+      update: function () {
+        this.run();
+      },
+      run: function () {
+        initList(data,'#ordered-container')
+      },
+      get: function () {
+        Dep.target = this;
+        var value = this.vm.data[this.exp]
+        Dep.target = null;
+        return value;
+      }
+    };
+
+    function compileElement(el) {
+      var childNodes = el.childNodes;
+      var self = this;
+      var newArr = [];
+      [].slice.call(childNodes).forEach(function (node) {
+        if (node.innerText !== undefined) {
+          newArr.push({
+            label: node.innerText
+          })
         }
-      }
-
+      });
+      return newArr
     }
-
-    function readNode() {
-      var changedNode = document.querySelector("#ordered-container")
-      console.log('changedNode', changedNode)
-    }
-
-    function nodeToFragment(el) {
-      var fragment = document.createDocumentFragment();
-      var child = el.firstChild;
-      while (child) {
-        // 将Dom元素移入fragment中
-        fragment.appendChild(child);
-        child = el.firstChild
+    function initList(data, node) {
+      for (var i = 0; i < data.length; i++) {
+        observe(data[i])
+        var listNode = document.createElement("LI");
+        var textnode = document.createTextNode(data[i].label);
+        listNode.appendChild(textnode);
+        listNode.setAttribute('className', 'ele');
+        listNode.setAttribute('draggable', true);
+        node.appendChild(listNode);
       }
-      return fragment;
     }
     //获取元素在父元素中的index
     function _index(el) {
@@ -113,7 +214,7 @@
 
       return index;
     }
-
+    // 动画
     function _animate(prevRect, target) {
       var ms = 300;
       if (ms) {
@@ -126,7 +227,7 @@
           (prevRect.left - currentRect.left) + 'px,' +
           (prevRect.top - currentRect.top) + 'px,0)'
         );
-        target.offsetWidth; // 触发重绘
+        target.offsetWidth;
         _css(target, 'transition', 'all ' + ms + 'ms');
         _css(target, 'transform', 'translate3d(0,0,0)');
         clearTimeout(target.animated);

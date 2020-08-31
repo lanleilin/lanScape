@@ -1,7 +1,5 @@
 
 
-# HTML&CSS：
-flex布局、垂直居中、清除浮动、BFC、三栏布局、两栏布局、动画、盒模型、H5新特性
 #JavaScript：
 继承、原型链、this指向、设计模式、call, apply, bind, new实现、防抖节流、let, var, const 区别、event、loop、promise使用及实现、promise并行执行和顺序执行、闭包、垃圾回收和内存泄漏、数组方法、数组乱序, 数组扁平化、事件委托、事件监听、事件模型、typescript
 #Vue:

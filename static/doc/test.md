@@ -9,7 +9,6 @@ vue数据双向绑定原理、vue computed原理、vue编译器结构图、生�
 #网络：
 HTTP1, HTTP2, HTTPS、浏览从输入网址到回车发生了什么、前端跨域、浏览器缓存、cookie, session, token, localstorage, sessionstorage、状态码、TCP连接(三次握手, 四次挥手)
 
-#性能优化
 # js 继承
 https://www.cnblogs.com/ranyonsue/p/11201730.html
 
